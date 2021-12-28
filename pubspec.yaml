@@ -38,6 +38,8 @@ dependencies:
   flag: ^5.0.0-nullsafety
   swipe_cards: ^0.1.0
 
+  swipeable_card: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
