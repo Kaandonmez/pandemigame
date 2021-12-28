@@ -63,27 +63,23 @@ class _gamescreen extends State<gamescreen> {
         ),
         body: Container(
             child: Column(children: [
-              Container(
-                height: 400,
-                child: Column(
-                  children: <Widget>[
-                    Image.asset("assets/images/ch.jpg"),
-                    Text('cat')
-                  ],
-                ),
-              ),
           Container(
-            height: 100,
+            height: 600,
             child: SwipeCards(
               matchEngine: _matchEngine,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
+                  height: 500,
                   alignment: Alignment.center,
                   color: _swipeItems[index].content.color,
-                  child: Text(
+                  child: Column(
+                    children: <Widget>[Text(
                     _swipeItems[index].content.text,
                     style: TextStyle(fontSize: 100),
                   ),
+                    Image.asset("assets/images/ch.jpg"),
+                    Text("yazı",style: TextStyle(fontSize: 30))
+                  ])
                 );
               },
               onStackFinished: () {
