@@ -1,5 +1,8 @@
 //@dart=2.9
+import 'dart:math';
 import 'package:flutter/material.dart';
+
+Random rnd = Random();
 
 class CardExample extends StatelessWidget {
   const CardExample({
@@ -29,8 +32,7 @@ class CardExample extends StatelessWidget {
 
       child: Column(
         children: <Widget>[
-          Image.network(
-              "https://upload.wikimedia.org/wikipedia/commons/6/6b/Braga_tren_%285%29.jpg"),
+          Image.asset("assets/images/" + rnd.nextInt(13).toString() + ".png"),
           Text('cat')
         ],
       ),
