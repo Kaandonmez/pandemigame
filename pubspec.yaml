@@ -37,6 +37,8 @@ dependencies:
   adobe_xd: ^2.0.0+1
   flag: ^5.0.0-nullsafety
 
+  swipeable_card: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

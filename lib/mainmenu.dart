@@ -1,3 +1,4 @@
+//@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './credits.dart';
@@ -6,7 +7,7 @@ import './zorluk.dart';
 
 class mainmenu extends StatelessWidget {
   mainmenu({
-    Key? key,
+    Key key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

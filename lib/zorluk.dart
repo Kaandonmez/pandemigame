@@ -1,13 +1,15 @@
+//@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './mainmenu.dart';
 import 'package:adobe_xd/page_link.dart';
-import './gamescreen.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pandemigame/example_slide_route.dart';
 
 class zorluk extends StatelessWidget {
   zorluk({
-    Key? key,
+    Key key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -97,7 +99,7 @@ class zorluk extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => gamescreen(),
+                  pageBuilder: () => ExampleRouteSlide(),
                 ),
               ],
               child: Container(
@@ -185,7 +187,7 @@ class zorluk extends StatelessWidget {
                   transition: LinkTransition.SlideLeft,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => gamescreen(),
+                  pageBuilder: () => ExampleRouteSlide(),
                 ),
               ],
               child: Stack(
@@ -267,7 +269,7 @@ class zorluk extends StatelessWidget {
                   transition: LinkTransition.SlideLeft,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => gamescreen(),
+                  pageBuilder: () => ExampleRouteSlide(),
                 ),
               ],
               child: Stack(
