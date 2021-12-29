@@ -203,13 +203,15 @@ class Utils {
   }
 
   void createActivities() {
-    activities.add(Activities("school", 1)); // 0 remote 1 face 2 no
-    activities.add(Activities("work", 1)); //1
-    activities.add(Activities("travel", 1)); //2
-    activities.add(Activities("sports", 1)); //3
-    activities.add(Activities("cinema", 1)); //4
-    activities.add(Activities("shopping", 1)); //5
-    activities.add(Activities("food", 1)); //6
+    activities.add(Activities("school", 1, true)); // 0 remote 1 face 2 no
+    activities.add(Activities("work", 1, true)); //1
+    activities.add(Activities("travel", 1, true)); //2
+    activities.add(Activities("sports", 1, true)); //3
+    activities.add(Activities("cinema", 1, true)); //4
+    activities.add(Activities("shopping", 1, true)); //5
+    activities.add(Activities("food", 1, true)); //6
+    activities.add(Activities("ceremony", 1, true)); //7
+    activities.add(Activities("start vaccination", 1, false)); //8
   }
 
   void covidSpread() {

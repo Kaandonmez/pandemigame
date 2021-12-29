@@ -13,7 +13,8 @@ void gameStarter() {
   utils.createHumans(difficulty); //!create hobbie bunun içinde bulunuyor.
   utils.createFamilies();
   utils.covidSpread();
-  utils.createQuestions(); //! sorular create_questions içinde belirtildikten sonra hepsi burada oluşturuluyor.
+  utils
+      .createQuestions(); //! sorular create_questions içinde belirtildikten sonra hepsi burada oluşturuluyor.
 }
 
 class MyApp extends StatelessWidget {

@@ -4,9 +4,10 @@ class Activities {
   int memberCount = 0;
   bool isActive = true;
 
-  Activities(String Name, int SocialDistance) {
+  Activities(String Name, int SocialDistance, bool isActive) {
     name = Name;
     socialDistance = SocialDistance;
+    isActive = isActive;
     //memberCount += 1;
     //! hobiler humanlar oluşturulurken ekleniyor ancak hobiler 1 kere create ediliyor memberCount şuan gereksiz.
   }
@@ -19,12 +20,16 @@ class Activities {
     memberCount -= 1;
   }
 
-  void changeStatus(){
+  void changeStatus() {
     isActive = !isActive;
   }
 
   @override
   String toString() {
-    return name + " " + socialDistance.toString() + "...   "+isActive.toString();
+    return name +
+        " " +
+        socialDistance.toString() +
+        "...   " +
+        isActive.toString();
   }
 }
