@@ -15,37 +15,86 @@ class Human {
   num? satisfaction;
   //int memberType = 0; //? 0'sa çocuk 1 se yetişkin 2 ise yaşlı
   bool isAlive = true;
+
+  double sensitivity = 0.0; // 1 e ne kadar yakınsa o kadar dikkatli
   double infectionRate = 0.0;
-  double sensitivity = 0.0;
-
-  // infectionRate = InfectionRate;
-  // socialDistance = SocialDistance;
-
-  // goToWork = GoToWork;
-  // goToSchool = GoToSchool;
-  // travel = Travel;
-  // sports = Sports;
-  // cinema = Cinema;
-  // shopping = Shopping;
-  // eat_drink = EatDrink;
-
-  // memberType = MemberType;
-  // status = Status;
-  // hid = Hid;
 
   Human(String Name, String Surname, int Age) {
     name = Name;
     surname = Surname;
     age = Age;
     isCovid = false;
+
     if (age < 5) {
       health = 95 + rnd.nextInt(6);
       satisfaction = null;
-      sensitivity = (7 + rnd.nextInt(4)) / 10;
-      setActivities([activities[0]]);
-    } else if (age >= 5 && age < 14) {
+      sensitivity = (70 + rnd.nextInt(31)) / 100;
+    } else if (age < 14) {
       health = 95 + rnd.nextInt(6);
       satisfaction = null;
+      sensitivity = (50 + rnd.nextInt(51)) / 100;
+      setActivities([
+        activities[0],
+        activities[2],
+        activities[3],
+        activities[4],
+        activities[5],
+        activities[6]
+      ]);
+    } else if (age <= 24) {
+      health = 90 + rnd.nextInt(11);
+      satisfaction = 40 + rnd.nextInt(41);
+      sensitivity = (20 + rnd.nextInt(61)) / 100;
+      setActivities([
+        activities[0],
+        activities[1],
+        activities[2],
+        activities[3],
+        activities[4],
+        activities[5],
+        activities[6]
+      ]);
+    } else if (age <= 40) {
+      health = 85 + rnd.nextInt(16);
+      satisfaction = 50 + rnd.nextInt(31);
+      sensitivity = (15 + rnd.nextInt(56)) / 100;
+      setActivities([
+        activities[1],
+        activities[2],
+        activities[3],
+        activities[4],
+        activities[5],
+        activities[6]
+      ]);
+    } else if (age <= 59) {
+      health = 75 + rnd.nextInt(16);
+      satisfaction = 60 + rnd.nextInt(21);
+      sensitivity = (10 + rnd.nextInt(66)) / 100;
+      setActivities([
+        activities[1],
+        activities[2],
+        activities[3],
+        activities[4],
+        activities[5],
+        activities[6]
+      ]);
+    } else if (age < 80) {
+      health = 65 + rnd.nextInt(16);
+      satisfaction = 70 + rnd.nextInt(21);
+      sensitivity = (45 + rnd.nextInt(51)) / 100;
+      setActivities([
+        activities[1],
+        activities[2],
+        activities[3],
+        activities[4],
+        activities[5],
+        activities[6]
+      ]);
+    } else if (age >= 80) {
+      health = 55 + rnd.nextInt(16);
+      satisfaction = 65 + rnd.nextInt(31);
+      sensitivity = (55 + rnd.nextInt(36)) / 100;
+      setActivities([activities[2]]);
     }
   }
 
@@ -77,8 +126,42 @@ class Human {
     }
   }
 
+  void setactByage(Activities act) {
+    if (age < 5) {
+    } else if (age < 14) {
+      if (act.name != "work") {
+        setActivities([act]);
+      }
+    } else if (age <= 24) {
+      setActivities([act]);
+    } else if (age <= 40) {
+      if (act.name != "school") {
+        setActivities([act]);
+      }
+    } else if (age <= 59) {
+      if (act.name != "school") {
+        setActivities([act]);
+      }
+    } else if (age < 80) {
+      if (act.name != "school") {
+        setActivities([act]);
+      }
+    } else if (age >= 80) {
+      if (act.name == "travel") {
+        setActivities([act]);
+      }
+    }
+  }
+
   List<Activities> getActivities() {
     return _activities;
+  }
+
+  void deleteActivity(Activities act) {
+    if (_activities.contains(act)) {
+      act.decrementMemberCount();
+    }
+    _activities.remove(act);
   }
 
   void makeDead() {

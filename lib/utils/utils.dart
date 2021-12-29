@@ -1,3 +1,5 @@
+import '/domain/model/resources.dart';
+
 import 'config.dart';
 import '../domain/model/covid.dart';
 import '../domain/model/family.dart';
@@ -110,16 +112,11 @@ class Utils {
     print(humans.length.toString());
     */
     //!   <---- hobiler burada oluşturuluyor.
-    int i = 0;
-    while (i < activities.length) {
-      print("There are a total of " +
-          activities[i]
-              .memberCount
-              .toString() + //* hangi hobiden kaç kişi var dağılımı görmek için yazıldı.
-          " people who have -> " +
-          activities[i].name +
-          "  hobby. ");
-      i++;
+    int j = 0;
+    while (j < humans.length) {
+      try {
+        humans[j].deleteActivity(activities[4]);
+      } catch (e) {}
     }
   }
 
@@ -208,21 +205,12 @@ class Utils {
 
   void createActivities() {
     activities.add(Activities("school", 1)); // 0 remote 1 face 2 no
-    activities.add(Activities("work", 1));
-    activities.add(Activities("travel", 1));
-    activities.add(Activities("sports", 1));
-    activities.add(Activities("cinema", 1));
-    activities.add(Activities("shopping", 1));
-    activities.add(Activities("food", 1));
-
-    int hobbieCounter = 0;
-    while (hobbieCounter < humans.length) {
-      int randomHobbyId = rnd.nextInt(activities.length);
-      Activities randomHobbie = activities[randomHobbyId];
-      humans[hobbieCounter].setActivities([randomHobbie]);
-      randomHobbie.incrementMemberCount();
-      hobbieCounter++;
-    }
+    activities.add(Activities("work", 1)); //1
+    activities.add(Activities("travel", 1)); //2
+    activities.add(Activities("sports", 1)); //3
+    activities.add(Activities("cinema", 1)); //4
+    activities.add(Activities("shopping", 1)); //5
+    activities.add(Activities("food", 1)); //6
   }
 
   void covidSpread() {
@@ -265,4 +253,10 @@ class Utils {
     print(questions.length.toString());
     families[5].id;
   }
+
+  void createResources() {
+    Resources Res = Resources();
+  }
+
+  void spendWeek() {}
 }
