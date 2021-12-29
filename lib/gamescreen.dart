@@ -39,7 +39,7 @@ class _gamescreen extends State<gamescreen> {
   void initState() {
     for (int i = 0; i < _question.length; i++) {
       _swipeItems.add(SwipeItem(
-          content: Content(text: _question[i].questionString, color: _colors[i] , askerImage: _question[i].askerImage),
+          content: Content(text: _question[i].questionString, color: _colors[rnd.nextInt(5)] , askerImage: _question[i].askerImage),
           likeAction: () {
             _scaffoldKey.currentState.showSnackBar(SnackBar(
               content: Text("Liked ${_question[i]}"),

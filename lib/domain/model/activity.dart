@@ -2,6 +2,7 @@ class Activities {
   String name = "";
   int socialDistance = 0;
   int memberCount = 0;
+  bool isActive = true;
 
   Activities(String Name, int SocialDistance) {
     name = Name;
@@ -18,9 +19,12 @@ class Activities {
     memberCount -= 1;
   }
 
+  void changeStatus(){
+    isActive = !isActive;
+  }
+
   @override
   String toString() {
-    //return name + " " + socialDistance.toString() + "...   ";
-    return name;
+    return name + " " + socialDistance.toString() + "...   "+isActive.toString();
   }
 }

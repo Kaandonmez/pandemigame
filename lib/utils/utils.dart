@@ -49,7 +49,9 @@ class Utils {
   }
 
   void createHumans(String selectedDifficulty) {
+    print("aktiviteler oluşturuluyor");
     createActivities();
+    print("aktiviteler oluşturuldu");
     switch (selectedDifficulty) {
       case "easy":
         {
@@ -66,6 +68,7 @@ class Utils {
           populationPyramide = utils.getIndiaPopulationPyramide();
         }
     }
+    print("insanlar oluşturuluyor");
     int counter = 0;
     while (counter < 200000) {
       //! toplam oluşturulacak insan sayısı buradan belirtiliyor.
@@ -105,6 +108,7 @@ class Utils {
       //print(humans[counter]);
       counter++;
     }
+    print("insanlar oluşturuldu");
     /*for (int i = 0; i < 100000; i++) {
       print(humans[i].toString());
     }
@@ -112,12 +116,6 @@ class Utils {
     print(humans.length.toString());
     */
     //!   <---- hobiler burada oluşturuluyor.
-    int j = 0;
-    while (j < humans.length) {
-      try {
-        humans[j].deleteActivity(activities[4]);
-      } catch (e) {}
-    }
   }
 
   void createFamilies() {
@@ -125,6 +123,7 @@ class Utils {
     int counter_adult = 30600; //13900~24699
     int counter_young = 115600; //24700~99999
     int counter_old = 0; //0~13899
+    print("aileler oluşturuluyor");
     while (counter_family < 29000) {
       //!  <----- kaç adet aile olşturulacağı burada belirleniyor.
 
@@ -197,7 +196,7 @@ class Utils {
 
       counter_family++;
     }
-
+    print("aileler oluşturuldu");
     /*for (var family in families) {
       print(family);
     }*/
@@ -247,11 +246,12 @@ class Utils {
   }
 
   void createQuestions() {
+    print("soru oluşturmaya geldik");
     create_Questions();
+    print("sorular oluşturuldu");
     print(questions[0].ifYes);
     print(questions[0].ifYes[0]);
     print(questions.length.toString());
-    families[5].id;
   }
 
   void createResources() {
