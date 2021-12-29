@@ -1,12 +1,17 @@
 //@dart=2.9
 import 'package:flutter/material.dart';
+import 'package:pandemigame/domain/model/questions.dart';
 import 'package:swipe_cards/swipe_cards.dart';
+import 'utils/config.dart';
+import "dart:math";
 
+Random rnd = Random();
 class Content {
   final String text;
   final Color color;
+  final String askerImage;
 
-  Content({this.text, this.color});
+  Content({this.text, this.color, this.askerImage});
 }
 
 class gamescreen extends StatefulWidget {
@@ -21,7 +26,7 @@ class _gamescreen extends State<gamescreen> {
   List<SwipeItem> _swipeItems = List<SwipeItem>();
   MatchEngine _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  final List<String> _names = ["Red", "Blue", "Green", "Yellow", "Ahhmet"];
+  final List<Questions> _question = questions;
   final List<Color> _colors = [
     Colors.red,
     Colors.blue,
@@ -32,18 +37,18 @@ class _gamescreen extends State<gamescreen> {
 
   @override
   void initState() {
-    for (int i = 0; i < _names.length; i++) {
+    for (int i = 0; i < _question.length; i++) {
       _swipeItems.add(SwipeItem(
-          content: Content(text: _names[i], color: _colors[i]),
+          content: Content(text: _question[i].questionString, color: _colors[i] , askerImage: _question[i].askerImage),
           likeAction: () {
             _scaffoldKey.currentState.showSnackBar(SnackBar(
-              content: Text("Liked ${_names[i]}"),
+              content: Text("Liked ${_question[i]}"),
               duration: Duration(milliseconds: 500),
             ));
           },
           nopeAction: () {
             _scaffoldKey.currentState.showSnackBar(SnackBar(
-              content: Text("Nope ${_names[i]}"),
+              content: Text("Nope ${_question[i]}"),
               duration: Duration(milliseconds: 500),
             ));
           }
@@ -75,10 +80,10 @@ class _gamescreen extends State<gamescreen> {
                   child: Column(
                     children: <Widget>[Text(
                     _swipeItems[index].content.text,
-                    style: TextStyle(fontSize: 100),
+                    style: TextStyle(fontSize: 30),
                   ),
-                    Image.asset("assets/images/ch.jpg"),
-                    Text("yazı",style: TextStyle(fontSize: 30))
+                    Image.asset("assets/images/characters/"+_swipeItems[index].content.askerImage+".png"),
+                    Text("yazı",style: TextStyle(fontSize: 15))
                   ])
                 );
               },

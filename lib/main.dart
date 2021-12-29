@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pandemigame/mainmenu.dart';
 import 'mainmenu.dart';
+import 'utils/config.dart';
 
 void main() {
+  gameStarter();
   runApp(const MyApp());
+}
+
+void gameStarter() {
+  setDifficulty("medium");
+  utils.createHumans(difficulty); //!create hobbie bunun içinde bulunuyor.
+  utils.createFamilies();
+  //utils.covidSpread();
+  utils.createQuestions(); //! sorular create_questions içinde belirtildikten sonra hepsi burada oluşturuluyor.
 }
 
 class MyApp extends StatelessWidget {
