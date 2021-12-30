@@ -70,6 +70,7 @@ class Utils {
     }
     print("insanlar oluşturuluyor");
     int counter = 0;
+    num totalHealth = 0.0;
     while (counter < 200000) {
       //! toplam oluşturulacak insan sayısı buradan belirtiliyor.
       /**
@@ -82,10 +83,12 @@ class Utils {
       if (counter < populationPyramide[4] * 2000) {
         humans.add(Human("Old" + counter.toString(), counter.toString(),
             getRandomAge(80, 100)));
+        totalHealth += humans[counter].health;
       } else if (counter <
           (populationPyramide[3] + populationPyramide[4]) * 2000) {
         humans.add(Human("Middle-old" + counter.toString(), counter.toString(),
             getRandomAge(60, 79)));
+        totalHealth += humans[counter].health;
       } else if (counter <
           (populationPyramide[3] +
                   populationPyramide[4] +
@@ -93,6 +96,7 @@ class Utils {
               2000) {
         humans.add(Human("Middle" + counter.toString(), counter.toString(),
             getRandomAge(40, 59)));
+        totalHealth += humans[counter].health;
       } else if (counter <
           (populationPyramide[3] +
                   populationPyramide[4] +
@@ -101,13 +105,17 @@ class Utils {
               2000) {
         humans.add(Human("Middle-young" + counter.toString(),
             counter.toString(), getRandomAge(25, 39)));
+        totalHealth += humans[counter].health;
       } else {
         humans.add(Human("Young" + counter.toString(), counter.toString(),
             getRandomAge(0, 24)));
+        totalHealth += humans[counter].health;
       }
       //print(humans[counter]);
       counter++;
     }
+    resources.health_level = totalHealth / (counter*100);
+    print(resources.health_level);
     print("insanlar oluşturuldu");
     /*for (int i = 0; i < 100000; i++) {
       print(humans[i].toString());

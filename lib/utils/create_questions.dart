@@ -21,30 +21,29 @@ questions.add(Questions("Soru Stringi Buraya!!", Soruidsi buraya int olarak giri
 
  */ ///
 
-String acikMi(Activities activity){
-  if(activity.isActive){
+String acikMi(Activities activity) {
+  if (activity.isActive) {
     return "açık";
-  }
-  else {
+  } else {
     return "kapalı";
   }
 }
 
 void create_Questions() {
   questions.add(Questions(
-      "Okullar: "+acikMi(activities[0])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Okullar: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       0,
       [
         [
           1.2, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.6,
-          [activities[0]]
+          -0.6
         ], //!evet ise
         [-0.85, 0, 0, 0.45, []] //  !hayır ise
       ],
-      "7"));
+      "7",
+      [activities[0]]));
 
   /*questions.add(Questions(
       "Kapanma durumu: bitirilip normal yasama donulsun mu ?",
@@ -68,15 +67,14 @@ void create_Questions() {
       "12"));
 */
   questions.add(Questions(
-      "Aşılama çalışmaları: "+acikMi(activities[8])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Aşılama çalışmaları: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       4,
       [
         [
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           15,
           0,
-          0.75,
-          [activities[8]]
+          0.75
         ], //!evet ise
         [
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
@@ -86,7 +84,8 @@ void create_Questions() {
           []
         ] //  !hayır ise
       ],
-      "2"));
+      "2",
+      [activities[8]]));
 
   questions.add(Questions(
       "Aşılama yapabilmek için gerekli olan ithalat iznini veriyor musunuz?",
@@ -96,12 +95,12 @@ void create_Questions() {
           -2.4, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          1.3,
-          []
+          1.3
         ], //!evet ise
         [0, 0, 0, -1.1, []] //  !hayır ise
       ],
-      "9"));
+      "9",
+      []));
 
   questions.add(Questions(
       "Vergi arttırımı yapılarak ile ekonomik seviye yukarı çekilsin mi?",
@@ -111,12 +110,12 @@ void create_Questions() {
           1.8, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -2.1,
-          []
+          -2.1
         ], //!evet ise
         [0, 0, 0, -0.3, []] //  !hayır ise
       ],
-      "3"));
+      "3",
+      []));
 
   questions.add(Questions(
       "Yabancı ülkelerden dış borç alarak ekonominize katkı sağlamak ister misiniz?",
@@ -126,48 +125,47 @@ void create_Questions() {
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.1,
-          []
+          -0.1
         ], //!evet ise
         [-0.25, 100, 0.18, 98, []] //  !hayır ise
       ],
-      "11"));
+      "11",
+      []));
 
   questions.add(Questions(
-      "Şehirler ve ülkeler arası yolculuklar: "+acikMi(activities[2])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Şehirler ve ülkeler arası yolculuklar: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       7,
       [
         [
           -1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.5,
-          [activities[2]]
+          -0.5
         ], //!evet ise
         [
           1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          0.3,
-          []
+          0.3
         ] //  !hayır ise
       ],
-      "7"));
+      "7",
+      [activities[2]]));
 
   questions.add(Questions(
-      "Spor müsabakaları: "+acikMi(activities[3])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Spor müsabakaları: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       9,
       [
         [
           -1.7, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.9,
-          [activities[3]]
+          -0.9
         ], //!evet ise
         [0.8, 0, 0, 0.2, []] //  !hayır ise
       ],
-      "10"));
+      "10",
+      [activities[3]]));
 
   questions.add(Questions(
       "Ekonomik maliyetini göze alarak tıp alanında geliştirmelere gitmek ister misiniz?",
@@ -177,12 +175,12 @@ void create_Questions() {
           -1.9, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           2.6,
-          0.4,
-          []
+          0.4
         ], //!evet ise
         [0, 0, 0, -0.05, []] //  !hayır ise
       ],
-      "2"));
+      "2",
+      []));
 
   questions.add(Questions(
       "Yerli aşı çalışmalarına yatırım yapmak ister misiniz?",
@@ -192,42 +190,42 @@ void create_Questions() {
           -1.05, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          1.3,
-          []
+          1.3
         ], //!evet ise
         [0, 0, 0, -0.05, []] //  !hayır ise
       ],
-      "8"));
+      "8",
+      []));
 
   questions.add(Questions(
-      "Ibadet yerleri: "+acikMi(activities[9])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Ibadet yerleri: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       14,
       [
         [
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.45,
-          [activities[9]]
+          -0.45
         ], //!evet ise
         [0, 0, 0, 0.1, []] //  !hayır ise
       ],
-      "5"));
+      "5",
+      [activities[9]]));
 
   questions.add(Questions(
-      "Alışveriş merkezleri: "+acikMi(activities[5])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Alışveriş merkezleri: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       15,
       [
         [
           -0.15, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.1,
-          [activities[5]]
+          -0.1
         ], //!evet ise
         [0.1, 0, 0, 0.05, []] //  !hayır ise
       ],
-      "10"));
+      "10",
+      [activities[5]]));
 
   /*questions.add(Questions(
       "Sokaga cikma yasagi getirilsin mi ? ",
@@ -237,8 +235,7 @@ void create_Questions() {
           -0.75, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.5,
-          [activities[0],activities[1],activities[2],activities[3],activities[4],activities[5],activities[6],activities[7]]
+          -0.5
         ], //!evet ise
         [
           0.2,
@@ -248,24 +245,26 @@ void create_Questions() {
           []
         ] //  !hayır ise
       ],
-      "12"));
+      "12",
+          [activities[0],activities[1],activities[2],activities[3],activities[4],activities[5],activities[6],activities[7]]
+          ));
 
    */
 
   questions.add(Questions(
-      "Düğün, nişan, kutlama gibi toplu aktiviteler:"+acikMi(activities[7])+"\nDeğişikliğe gitmek ister misiniz?",
+      "Düğün, nişan, kutlama gibi toplu aktiviteler: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
       17,
       [
         [
           -0.25, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.15,
-          [activities[7]]
+          -0.15
         ], //!evet ise
         [0.1, 0, 0, 0.2, []] //  !hayır ise
       ],
-      "8"));
+      "8",
+      [activities[7]]));
 
   questions.add(Questions(
       "Sosyal mesafe, maske kural ihlallerinde idari para cezası uygulansın mı?",
@@ -275,12 +274,12 @@ void create_Questions() {
           0.15, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -0.4,
-          []
+          -0.4
         ], //!evet ise
         [0, 0, 0, 0.1, []] //  !hayır ise
       ],
-      "5"));
+      "5",
+      []));
 /*
   questions.add(Questions(
       "Istıfa edecek misiniz ? ",

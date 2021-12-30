@@ -31,23 +31,10 @@ class Resources {
   num medical_level = 0;
 
   Resources() {
-    if (difficulty == "easy") {
-      health_level = 100;
-      satisfaction_level = 100;
-      economy_level = 90;
-      medical_level = 25;
-    }
     if (difficulty == "medium") {
-      health_level = 80;
-      satisfaction_level = 90;
-      economy_level = 75;
-      medical_level = 20;
-    }
-    if (difficulty == "hard") {
-      health_level = 70;
-      satisfaction_level = 75;
-      economy_level = 60;
-      medical_level = 15;
+      satisfaction_level = 0.9;
+      economy_level = 0.75;
+      medical_level = 0.2;
     }
   }
 }

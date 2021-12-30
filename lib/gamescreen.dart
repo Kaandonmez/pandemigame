@@ -1,12 +1,14 @@
 //@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:pandemigame/domain/model/questions.dart';
+import 'package:pandemigame/utils/create_questions.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'utils/config.dart';
 import "dart:math";
 import 'package:percent_indicator/percent_indicator.dart';
 
 Random rnd = Random();
+
 class Content {
   final String text;
   final Color color;
@@ -16,22 +18,22 @@ class Content {
 }
 
 class gamescreen extends StatefulWidget {
-  gamescreen({
+  const gamescreen({
     Key key,
   }) : super(key: key);
 
   @override
-  _gamescreen createState() => _gamescreen();
+  gameScreen createState() => gameScreen();
 }
 
-class _gamescreen extends State<gamescreen> {
-  List<SwipeItem> _swipeItems = List<SwipeItem>();
+class gameScreen extends State<gamescreen> {
+  final List<SwipeItem> _swipeItems = List<SwipeItem>();
   MatchEngine _matchEngine;
   var health_level = resources.health_level;
   var satisfaction_level = resources.satisfaction_level;
   var economy_level = resources.economy_level;
   var medical_level = resources.medical_level;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
     Colors.red,
@@ -58,9 +60,14 @@ class _gamescreen extends State<gamescreen> {
   @override
   void initState() {
     for (int i = 0; i < _question.length; i++) {
+      var questionText = _question[i].questionString;
+      if (_question[i].effectActivities.isNotEmpty) {
+        questionText = _question[i].questionString.replaceAll(
+            "&aktifmi&", acikMi(_question[i].effectActivities.first));
+      }
       _swipeItems.add(SwipeItem(
           content: Content(
-              text: _question[i].questionString,
+              text: questionText,
               color: _colors[rnd.nextInt(5)],
               askerImage: _question[i].askerImage),
           likeAction: () {
@@ -72,7 +79,6 @@ class _gamescreen extends State<gamescreen> {
             reloadResources();
           }));
     }
-
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
   }
@@ -89,89 +95,134 @@ class _gamescreen extends State<gamescreen> {
             Container(
                 decoration: BoxDecoration(
                     color: Colors.grey[900],
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10))),
                 child: Column(
                   children: [
                     Divider(
-                      height: MediaQuery.of(context).size.height*0.05,
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
                     Row(
                       children: [
                         LinearPercentIndicator(
-                          width: MediaQuery.of(context).size.width-40,
-                          lineHeight: MediaQuery.of(context).size.height*0.03,
-                          percent: economy_level / 100,
+                          width: MediaQuery.of(context).size.width - 40,
+                          lineHeight: MediaQuery.of(context).size.height * 0.03,
+                          percent: economy_level,
                           backgroundColor: Colors.grey,
                           progressColor: Colors.blue,
                           leading: RichText(
                               text: WidgetSpan(
                                   child: Icon(
-                                    Icons.attach_money_rounded,
-                                    color: Colors.greenAccent[400],
-                                  ))),
+                            Icons.attach_money_rounded,
+                            color: Colors.greenAccent[400],
+                          ))),
                         ),
                       ],
                     ),
                     Divider(
-                      height: MediaQuery.of(context).size.height*0.02,
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width-40,
-                      lineHeight: MediaQuery.of(context).size.height*0.03,
-                      percent: satisfaction_level / 100,
+                      width: MediaQuery.of(context).size.width - 40,
+                      lineHeight: MediaQuery.of(context).size.height * 0.03,
+                      percent: satisfaction_level,
                       backgroundColor: Colors.grey,
                       progressColor: Colors.blue,
                       leading: RichText(
                           text: WidgetSpan(
                               child: Icon(
-                                Icons.face_rounded,
-                                color: Colors.yellow[300],
-                              ))),
+                        Icons.face_rounded,
+                        color: Colors.yellow[300],
+                      ))),
                     ),
                     Divider(
-                      height: MediaQuery.of(context).size.height*0.02,
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width-40,
-                      lineHeight: MediaQuery.of(context).size.height*0.03,
-                      percent: health_level / 100,
+                      width: MediaQuery.of(context).size.width - 40,
+                      lineHeight: MediaQuery.of(context).size.height * 0.03,
+                      percent: health_level,
                       backgroundColor: Colors.grey,
                       progressColor: Colors.blue,
                       leading: RichText(
                           text: WidgetSpan(
                               child: Icon(
-                                Icons.local_hospital_rounded,
-                                color: Colors.red[600],
-                              ))),
+                        Icons.local_hospital_rounded,
+                        color: Colors.red[600],
+                      ))),
                     ),
                     Divider(
-                      height: MediaQuery.of(context).size.height*0.02,
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width-40,
-                      lineHeight: MediaQuery.of(context).size.height*0.03,
-                      percent: medical_level / 100,
+                      width: MediaQuery.of(context).size.width - 40,
+                      lineHeight: MediaQuery.of(context).size.height * 0.03,
+                      percent: medical_level,
                       backgroundColor: Colors.grey,
                       progressColor: Colors.blue,
                       leading: RichText(
                         text: WidgetSpan(
                             child: Icon(
-                              Icons.healing_rounded,
-                              color: Colors.blue[800],
-                            )),
+                          Icons.healing_rounded,
+                          color: Colors.blue[800],
+                        )),
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 10,
                     ),
                   ],
                 )),
-            Divider(
-              height: MediaQuery.of(context).size.height*0.03, //! arasındaki boşluk buradan ayarlanıyor!
-              thickness: 0,
-              color: Colors.grey[800],
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    for (int i = 0; i < activities.length / 2; i++)
+                      Container(
+                          margin: EdgeInsets.fromLTRB(1, 2, 1, 1),
+                          padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: activities[i].isActive
+                                ? Colors.green
+                                : Colors.red,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(30.0),
+                              bottomLeft: Radius.circular(30.0),
+                              topLeft: Radius.circular(30.0),
+                              bottomRight: Radius.circular(30.0),
+                            ),
+                          ),
+                          height: MediaQuery.of(context).size.height * 0.03,
+                          child: Text(activities[i].name)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    for (int i = activities.length ~/ 2;
+                        i < activities.length;
+                        i++)
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 2, 1, 0),
+                          padding: EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: activities[i].isActive
+                                ? Colors.green
+                                : Colors.red,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(30.0),
+                              bottomLeft: Radius.circular(30.0),
+                              topLeft: Radius.circular(30.0),
+                              bottomRight: Radius.circular(30.0),
+                            ),
+                          ),
+                          height: MediaQuery.of(context).size.height * 0.03,
+                          child: Text(activities[i].name)),
+                  ],
+                ),
+              ],
             ),
             SwipeCards(
               matchEngine: _matchEngine,
@@ -179,30 +230,32 @@ class _gamescreen extends State<gamescreen> {
                 return Container(
                     decoration: BoxDecoration(
                       color: _swipeItems[index].content.color,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(30.0),
                         bottomLeft: Radius.circular(30.0),
                         topLeft: Radius.circular(30.0),
                         bottomRight: Radius.circular(30.0),
                       ),
                     ),
-                    height: MediaQuery.of(context).size.height*0.65,
+                    height: MediaQuery.of(context).size.height * 0.6,
                     alignment: Alignment.center,
                     child: Column(children: <Widget>[
                       Padding(
                           padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                           child: Center(
                               child: Text(
-                                _swipeItems[index].content.text,
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ))),
-                      Image.asset("assets/images/characters/" +
-                          _swipeItems[index].content.askerImage +
-                          ".png",
-                      width: MediaQuery.of(context).size.height*0.45,
-                      height: MediaQuery.of(context).size.height*0.45,)
+                            _swipeItems[index].content.text,
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ))),
+                      Image.asset(
+                        "assets/images/characters/" +
+                            _swipeItems[index].content.askerImage +
+                            ".png",
+                        width: MediaQuery.of(context).size.height * 0.42,
+                        height: MediaQuery.of(context).size.height * 0.42,
+                      )
                     ]));
               },
               onStackFinished: () {

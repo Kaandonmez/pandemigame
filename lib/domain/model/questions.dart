@@ -19,19 +19,22 @@ class Questions {
 
   String askerImage = "1";
 
+  List<Activities> effectActivities = [];
+
   var ifYes =
       []; //! mesela 4 tane değişken değerimi olsun (sağlık psikolji gibi) ifYes[0.25,-100,-0.18,-98,7]
 
   var ifNo =
       []; //! mesela 4 tane değişken değerimi olsun (sağlık psikolji gibi) ifNo[-0.25,100,0.18,98,7]
 
-  Questions(var qString, int id, List yesno, String _askerImage) {
+  Questions(var qString, int id, List yesno, String _askerImage,
+      List<Activities> _effectActivities) {
     questionString = qString;
 
     askerImage = _askerImage;
 
     questionId = id;
-
+    effectActivities.addAll(_effectActivities);
     ifYes = yesno[0];
     ifNo = yesno[1];
   }
@@ -49,12 +52,6 @@ class Questions {
   }
 
   swipeYes() {
-    if(questionString.contains("açık")){
-      questionString.replaceAll("açık", "kapalı");
-    }
-    else {
-      questionString.replaceAll("kapalı", "açık");
-    }
     // ! ilgili kart yes kararına swipe edildikten sonra bu metot çağırılacak.
     // todo: oyunun kaybedildiğini anlamak için ressources kontrolü timeline içine eklenirse daha mantıklı olacaktır.
     //? burada sadece değerlerin belirli aralıklarda tutulması sağlanacak.
@@ -69,28 +66,27 @@ class Questions {
     resources.health_level += ifYes[1];
     resources.medical_level += ifYes[2];
     resources.satisfaction_level += ifYes[3];
-    List<Activities> changeStatusActivities = ifYes[4];
     //sırasıyla->>>> school vaci sport sinem trvl shop food
 
-    if (resources.economy_level > 100) {
-      resources.economy_level = 100;
+    if (resources.economy_level > 1.0) {
+      resources.economy_level = 1.0;
     } else if (resources.economy_level < 0) {
-      resources.economy_level = 0;
+      resources.economy_level = 0.0;
     }
-    if (resources.health_level > 100) {
-      resources.health_level = 100;
+    if (resources.health_level > 1.0) {
+      resources.health_level = 1.0;
     } else if (resources.health_level < 0) {
-      resources.health_level = 0;
+      resources.health_level = 0.0;
     }
-    if (resources.medical_level > 100) {
-      resources.medical_level = 100;
+    if (resources.medical_level > 1.0) {
+      resources.medical_level = 1.0;
     } else if (resources.medical_level < 0) {
-      resources.medical_level = 0;
+      resources.medical_level = 0.0;
     }
-    if (resources.satisfaction_level > 100) {
-      resources.satisfaction_level = 100;
+    if (resources.satisfaction_level > 1.0) {
+      resources.satisfaction_level = 1.0;
     } else if (resources.satisfaction_level < 0) {
-      resources.satisfaction_level = 0;
+      resources.satisfaction_level = 0.0;
     }
 
     print("resources.economy_level: " + resources.economy_level.toString());
@@ -99,6 +95,7 @@ class Questions {
     print("resources.satisfaction_level: " +
         resources.satisfaction_level.toString());
 
+    List<Activities> changeStatusActivities = effectActivities;
     changeStatusActivities.forEach((activity) {
       activity.changeStatus();
       print(activity.toString());
@@ -121,36 +118,30 @@ class Questions {
 
     //sırasıyla->>>> school vaci sport sinem trvl shop food
 
-    if (resources.economy_level > 100) {
-      resources.economy_level = 100;
+    if (resources.economy_level > 1.0) {
+      resources.economy_level = 1.0;
     } else if (resources.economy_level < 0) {
-      resources.economy_level = 0;
+      resources.economy_level = 0.0;
     }
-    if (resources.health_level > 100) {
-      resources.health_level = 100;
+    if (resources.health_level > 1.0) {
+      resources.health_level = 1.0;
     } else if (resources.health_level < 0) {
-      resources.health_level = 0;
+      resources.health_level = 0.0;
     }
-    if (resources.medical_level > 100) {
-      resources.medical_level = 100;
+    if (resources.medical_level > 1.0) {
+      resources.medical_level = 1.0;
     } else if (resources.medical_level < 0) {
-      resources.medical_level = 0;
+      resources.medical_level = 0.0;
     }
-    if (resources.satisfaction_level > 100) {
-      resources.satisfaction_level = 100;
+    if (resources.satisfaction_level > 1.0) {
+      resources.satisfaction_level = 1.0;
     } else if (resources.satisfaction_level < 0) {
-      resources.satisfaction_level = 0;
+      resources.satisfaction_level = 0.0;
     }
     print("resources.economy_level: " + resources.economy_level.toString());
     print("resources.health_level: " + resources.health_level.toString());
     print("resources.medical_level: " + resources.medical_level.toString());
     print("resources.satisfaction_level: " +
         resources.satisfaction_level.toString());
-
-    List<Activities> changeStatusActivities = ifNo[4];
-    changeStatusActivities.forEach((activity) {
-      activity.changeStatus();
-      print(activity.toString());
-    });
   }
 }

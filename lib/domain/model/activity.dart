@@ -4,10 +4,10 @@ class Activities {
   int memberCount = 0;
   bool isActive = true;
 
-  Activities(String Name, int SocialDistance, bool isActive) {
+  Activities(String Name, int SocialDistance, bool _isActive) {
     name = Name;
     socialDistance = SocialDistance;
-    isActive = isActive;
+    isActive = _isActive;
     //memberCount += 1;
     //! hobiler humanlar oluşturulurken ekleniyor ancak hobiler 1 kere create ediliyor memberCount şuan gereksiz.
   }
