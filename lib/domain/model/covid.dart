@@ -1,52 +1,58 @@
 import 'dart:math';
 
-import '/domain/model/activity.dart';
+import 'package:pandemigame/domain/model/family.dart';
 
+import '/domain/model/activity.dart';
 import '../../utils/config.dart';
 import 'human.dart';
 
-var rand = Random(); //! daha sonra lazım olabilir diye burada.
 
 class Covid {
-  //String variantName = ""; //? Eğer birden fazla virüs varyatı ile çalışılacak ise bu onları ayıretmek için kullanılabilir.
-  num rFactor = 0; //! Virüsün bluştırıcılık faktörü.
+  int positiveCounter = 0;
+  List<Family> positiveFamilies = [];
 
-  Covid(/* String variantname,*/ num rfactor) {
-    //variantName = variantname;
-    rFactor = rfactor;
+  List<Family> getPositiveFamilies(){
+    return positiveFamilies;
   }
-
   void makeHumanCovid(Human human) {
     //* tek bir insanı covid yap.
     human.isCovid = true;
     try {
-      makeFamilyCovid(human.familyId); // todo:
+      makeFamilyCovid(families[human.familyId]); // todo:
     } catch (e) {}
   }
 
-  void makeFamilyCovid(int familyid) {
+  void makeFamilyCovid(Family family) {
+    positiveFamilies.add(family);
+    family.recoverDay = 2;
     int counter = 0;
-    while (counter < families[familyid].members.length) {
-      families[familyid].members[counter].isCovid = true;
+    while (counter < family.members.length) {
+      family.members[counter].isCovid = true;
+      family.members[counter].getActivities().forEach((activity) {
+        activity.infectedHumans++;
+      });
       counter++;
+      positiveCounter++;
     }
   }
 
-  void getRidOfHumansCovid(List Members) {
-    //* parametre olarak human dizisi alır. Hepsini covidden kurtarır.
-    int counter = 0;
-    while (counter < Members.length) {
-      Members[counter].isCovid = false;
-      counter++;
-    }
+  void getRidOfFamiliesCovid(Family family) {
+    positiveFamilies.remove(family);
+    family.members.forEach((human) {
+      human.isCovid = false;
+      --positiveCounter;
+      human.getActivities().forEach((activity) {
+        --activity.infectedHumans;
+      });
+    });
   }
 
   void calculteRisk(Human human, Activities act) {
-    act.socialDistance;
+    act.infectionRate;
     human.infectionRate = 1;
     //! antibody , sensitivity , socialDistance
 
-    1 - human.sensitivity + act.socialDistance;
+    1 - human.sensitivity + act.infectionRate;
   }
 
   //todo: belki daha sonra ortama hobiye ve virüs tipine göre covid yayılması aşağıdaki prototipe yazılabilir. (mi?)

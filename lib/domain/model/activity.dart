@@ -1,15 +1,23 @@
+import 'package:pandemigame/domain/model/family.dart';
+
 class Activities {
   String name = "";
-  int socialDistance = 0;
+  double infectionRate = 0.0;
   int memberCount = 0;
   bool isActive = true;
+  List<Family> familiesDo = [];
+  int infectedHumans = 0;
 
-  Activities(String Name, int SocialDistance, bool _isActive) {
+  Activities(String Name, double InfectionRate, bool _isActive) {
     name = Name;
-    socialDistance = SocialDistance;
+    infectionRate = InfectionRate;
     isActive = _isActive;
     //memberCount += 1;
     //! hobiler humanlar oluşturulurken ekleniyor ancak hobiler 1 kere create ediliyor memberCount şuan gereksiz.
+  }
+
+  double getInfectionRate(){
+    return infectionRate+infectedHumans/2000000;
   }
 
   void incrementMemberCount() {
@@ -28,7 +36,7 @@ class Activities {
   String toString() {
     return name +
         " " +
-        socialDistance.toString() +
+        infectionRate.toString() +
         "...   " +
         isActive.toString();
   }

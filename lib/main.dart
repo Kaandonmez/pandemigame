@@ -12,7 +12,6 @@ void gameStarter() {
   setDifficulty("medium");
   utils.createHumans(difficulty); //!create hobbie bunun içinde bulunuyor.
   utils.createFamilies();
-  utils.covidSpread();
   utils
       .createQuestions(); //! sorular create_questions içinde belirtildikten sonra hepsi burada oluşturuluyor.
 }

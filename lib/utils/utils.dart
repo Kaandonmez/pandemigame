@@ -1,15 +1,16 @@
 import '/domain/model/resources.dart';
 
 import 'config.dart';
-import '../domain/model/covid.dart';
-import '../domain/model/family.dart';
-import '../domain/model/activity.dart';
-import '../domain/model/human.dart';
+import 'package:pandemigame/domain/model/covid.dart';
+import '/domain/model/family.dart';
+import '/domain/model/activity.dart';
+import '/domain/model/human.dart';
 import 'create_questions.dart';
+import 'dart:math';
 
 class Utils {
   var newZealandPopulationPyramide = [19.431, 64.201, 16.368];
-
+  Random rnd = new Random();
 // todo: liste yeni aralıklarla düzenlenecek!
   //var turkeyPopulationPyramide = [23.942,67.077,8.981];
   var turkeyPopulationPyramide = [42.2, 24.7, 17.8, 13.9, 1.4];
@@ -211,8 +212,8 @@ class Utils {
   }
 
   void createActivities() {
-    activities.add(Activities("school", 1, true)); // 0 remote 1 face 2 no
-    activities.add(Activities("work", 1, true)); //1
+    activities.add(Activities("school", 0.54, true)); // 0 remote 1 face 2 no
+    activities.add(Activities("work", 0.45, true)); //1
     activities.add(Activities("travel", 1, true)); //2
     activities.add(Activities("sports", 1, true)); //3
     activities.add(Activities("cinema", 1, true)); //4
@@ -221,39 +222,6 @@ class Utils {
     activities.add(Activities("ceremony", 1, true)); //7
     activities.add(Activities("start vaccination", 1, false)); //8
     activities.add(Activities("worship", 1, true)); //9
-  }
-
-  void covidSpread() {
-    // todo: min 1 kişi kesin hasta olacak human sınıfına boolean isCovid eklenebilir.
-    //!done
-
-    // todo: virüs 2 yolla yayılacak, family içinde, ortak hobiye sahip kişilerde.
-    // todo: herhangi bir aile bireyinin sahip olduğu X hobisi diğer aile üyeleri tarafından bensenmese de olur. (mu?)
-    // todo: yaş ilerledikçe bulaştırıcılığı az hobiler tanımlanabilir.
-    // todo: yaşlılar covid'den daha çok etkileniyor. (kronik rahatsızlıkları olanlar göz ardı edildi.)
-    covid.add(Covid(0.8));
-    covid[0].makeHumanCovid(humans[0]);
-    print("\n");
-    /** buraları 0. insanı ve 0. aileyi covid yapacak mı diye yazıldı. */
-    print(humans[0].isCovid.toString());
-    covid[0].makeFamilyCovid(0);
-    print(families[0].toString());
-    print("\n");
-    print("\n");
-    int i = 0;
-    while (i < activities.length) {
-      print("There are a total of " +
-          activities[i]
-              .memberCount
-              .toString() + //* hangi hobiden kaç kişi var dağılımı görmek için yazıldı.
-          " people who have -> " +
-          activities[i].name +
-          "  hobby. ");
-      i++;
-    }
-
-    print("\n");
-    print("\n");
   }
 
   void createQuestions() {
@@ -267,6 +235,21 @@ class Utils {
 
   void createResources() {
     Resources Res = Resources();
+  }
+
+  void simulateOneWeek(){
+    positiveFamilies().forEach((family) {
+      if(--family.recoverDay == 0){
+        covid.getRidOfFamiliesCovid(family);
+      }
+    });
+    activities.forEach((activity) {
+      activity.familiesDo.forEach((familyDoes) {
+        if(rnd.nextDouble()<activity.getInfectionRate()){
+          covid.makeFamilyCovid(familyDoes);
+        }
+      });
+    });
   }
 
   void spendWeek() {}

@@ -6,9 +6,9 @@ import 'package:swipe_cards/swipe_cards.dart';
 import 'utils/config.dart';
 import "dart:math";
 import 'package:percent_indicator/percent_indicator.dart';
+import '/domain/model/covid.dart';
 
 Random rnd = Random();
-
 class Content {
   final String text;
   final Color color;
@@ -155,20 +155,7 @@ class gameScreen extends State<gamescreen> {
                     Divider(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width - 40,
-                      lineHeight: MediaQuery.of(context).size.height * 0.03,
-                      percent: medical_level,
-                      backgroundColor: Colors.grey,
-                      progressColor: Colors.blue,
-                      leading: RichText(
-                        text: WidgetSpan(
-                            child: Icon(
-                          Icons.healing_rounded,
-                          color: Colors.blue[800],
-                        )),
-                      ),
-                    ),
+                    Text(covid.positiveCounter),
                     const Divider(
                       height: 10,
                     ),

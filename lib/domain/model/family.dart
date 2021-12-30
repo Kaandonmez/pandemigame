@@ -1,8 +1,11 @@
+import 'package:pandemigame/utils/config.dart';
+
 import '/domain/model/activity.dart';
 import '/domain/model/human.dart';
 
 class Family {
   int id = 0;
+  int recoverDay = 0;
   List<Human> members = [];
   List<Activities> activities = [];
 
@@ -14,6 +17,7 @@ class Family {
         Members[i].getActivities().forEach((activity) {
           if (activities.contains(activity) == false) {
             activities.add(activity);
+            activity.familiesDo.add(families[Id]);
           }
         });
         Members[i].setFamilyId(Id);
