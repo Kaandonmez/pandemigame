@@ -4,10 +4,9 @@ import 'package:pandemigame/domain/model/questions.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'utils/config.dart';
 import "dart:math";
-import '/domain/model/resources.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 Random rnd = Random();
-
 class Content {
   final String text;
   final Color color;
@@ -31,7 +30,7 @@ class _gamescreen extends State<gamescreen> {
   var health_level = resources.health_level;
   var satisfaction_level = resources.satisfaction_level;
   var economy_level = resources.economy_level;
-  var medical_level= resources.medical_level;
+  var medical_level = resources.medical_level;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
@@ -41,7 +40,7 @@ class _gamescreen extends State<gamescreen> {
     Colors.yellow,
     Colors.orange
   ];
-  void reloadResources(){
+  void reloadResources() {
     setState(() {
       health_level = resources.health_level;
     });
@@ -52,9 +51,10 @@ class _gamescreen extends State<gamescreen> {
       economy_level = resources.economy_level;
     });
     setState(() {
-      medical_level= resources.medical_level;
+      medical_level = resources.medical_level;
     });
   }
+
   @override
   void initState() {
     for (int i = 0; i < _question.length; i++) {
@@ -82,57 +82,134 @@ class _gamescreen extends State<gamescreen> {
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.grey[800],
-        body: Container(
-            child: Column(children: [
-          Container(
-                height: 100,
-                color: Colors.deepOrange,
-              child: Row(
-                children: [
-                  Container(
-                    child: Text("Sağlık: "+health_level.toStringAsPrecision(3)),
-                  ),
-                  Container(
-                    child: Text("Memnuniyet: "+satisfaction_level.toStringAsPrecision(3)),
-                  ),
-                  Container(
-                    child: Text("Ekonomi: "+economy_level.toStringAsPrecision(3)),
-                  ),
-                  Container(
-                    child: Text("Medical: "+medical_level.toStringAsPrecision(3)),
-                  ),
-                ],
-              )
-          ),
-          Container(
-            height: 550,
-            child: SwipeCards(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[900],
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10))),
+                child: Column(
+                  children: [
+                    Divider(
+                      height: MediaQuery.of(context).size.height*0.05,
+                    ),
+                    Row(
+                      children: [
+                        LinearPercentIndicator(
+                          width: MediaQuery.of(context).size.width-40,
+                          lineHeight: MediaQuery.of(context).size.height*0.03,
+                          percent: economy_level / 100,
+                          backgroundColor: Colors.grey,
+                          progressColor: Colors.blue,
+                          leading: RichText(
+                              text: WidgetSpan(
+                                  child: Icon(
+                                    Icons.attach_money_rounded,
+                                    color: Colors.greenAccent[400],
+                                  ))),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: MediaQuery.of(context).size.height*0.02,
+                    ),
+                    LinearPercentIndicator(
+                      width: MediaQuery.of(context).size.width-40,
+                      lineHeight: MediaQuery.of(context).size.height*0.03,
+                      percent: satisfaction_level / 100,
+                      backgroundColor: Colors.grey,
+                      progressColor: Colors.blue,
+                      leading: RichText(
+                          text: WidgetSpan(
+                              child: Icon(
+                                Icons.face_rounded,
+                                color: Colors.yellow[300],
+                              ))),
+                    ),
+                    Divider(
+                      height: MediaQuery.of(context).size.height*0.02,
+                    ),
+                    LinearPercentIndicator(
+                      width: MediaQuery.of(context).size.width-40,
+                      lineHeight: MediaQuery.of(context).size.height*0.03,
+                      percent: health_level / 100,
+                      backgroundColor: Colors.grey,
+                      progressColor: Colors.blue,
+                      leading: RichText(
+                          text: WidgetSpan(
+                              child: Icon(
+                                Icons.local_hospital_rounded,
+                                color: Colors.red[600],
+                              ))),
+                    ),
+                    Divider(
+                      height: MediaQuery.of(context).size.height*0.02,
+                    ),
+                    LinearPercentIndicator(
+                      width: MediaQuery.of(context).size.width-40,
+                      lineHeight: MediaQuery.of(context).size.height*0.03,
+                      percent: medical_level / 100,
+                      backgroundColor: Colors.grey,
+                      progressColor: Colors.blue,
+                      leading: RichText(
+                        text: WidgetSpan(
+                            child: Icon(
+                              Icons.healing_rounded,
+                              color: Colors.blue[800],
+                            )),
+                      ),
+                    ),
+                    Divider(
+                      height: 10,
+                    ),
+                  ],
+                )),
+            Divider(
+              height: MediaQuery.of(context).size.height*0.03, //! arasındaki boşluk buradan ayarlanıyor!
+              thickness: 0,
+              color: Colors.grey[800],
+            ),
+            SwipeCards(
               matchEngine: _matchEngine,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                    height: 470,
+                    decoration: BoxDecoration(
+                      color: _swipeItems[index].content.color,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(30.0),
+                        bottomLeft: Radius.circular(30.0),
+                        topLeft: Radius.circular(30.0),
+                        bottomRight: Radius.circular(30.0),
+                      ),
+                    ),
+                    height: MediaQuery.of(context).size.height*0.65,
                     alignment: Alignment.center,
-                    color: _swipeItems[index].content.color,
                     child: Column(children: <Widget>[
                       Padding(
                           padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                           child: Center(
                               child: Text(
-                            _swipeItems[index].content.text,
-                            style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ))),
+                                _swipeItems[index].content.text,
+                                style: const TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ))),
                       Image.asset("assets/images/characters/" +
                           _swipeItems[index].content.askerImage +
-                          ".png")
+                          ".png",
+                      width: MediaQuery.of(context).size.height*0.5,
+                      height: MediaQuery.of(context).size.height*0.5,)
                     ]));
               },
               onStackFinished: () {
                 initState();
               },
             ),
-          ),
-        ],mainAxisAlignment: MainAxisAlignment.end,)));
+          ],
+        ));
   }
 }
