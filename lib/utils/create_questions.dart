@@ -32,7 +32,7 @@ String acikMi(Activities activity){
 
 void create_Questions() {
   questions.add(Questions(
-      "Okullar: "+acikMi(activities[0])+". Değişikliğe gitmek ister misiniz?",
+      "Okullar: "+acikMi(activities[0])+"\nDeğişikliğe gitmek ister misiniz?",
       0,
       [
         [
@@ -68,7 +68,7 @@ void create_Questions() {
       "12"));
 */
   questions.add(Questions(
-      "Aşılama çalışmaları: "+acikMi(activities[8])+". Değişikliğe gitmek ister misiniz?",
+      "Aşılama çalışmaları: "+acikMi(activities[8])+"\nDeğişikliğe gitmek ister misiniz?",
       4,
       [
         [
@@ -119,7 +119,7 @@ void create_Questions() {
       "3"));
 
   questions.add(Questions(
-      "Yabancı ülkelerden diş borç alarak ekonominize katkı sağlamak ister misiniz?",
+      "Yabancı ülkelerden dış borç alarak ekonominize katkı sağlamak ister misiniz?",
       6,
       [
         [
@@ -134,7 +134,7 @@ void create_Questions() {
       "11"));
 
   questions.add(Questions(
-      "Şehirler ve ülkeler arası yolculuklar: "+acikMi(activities[2])+". Değişikliğe gitmek ister misiniz?",
+      "Şehirler ve ülkeler arası yolculuklar: "+acikMi(activities[2])+"\nDeğişikliğe gitmek ister misiniz?",
       7,
       [
         [
@@ -155,7 +155,7 @@ void create_Questions() {
       "7"));
 
   questions.add(Questions(
-      "Spor müsabakaları: "+acikMi(activities[3])+". Değişikliğe gitmek ister misiniz?",
+      "Spor müsabakaları: "+acikMi(activities[3])+"\nDeğişikliğe gitmek ister misiniz?",
       9,
       [
         [
@@ -200,7 +200,7 @@ void create_Questions() {
       "8"));
 
   questions.add(Questions(
-      "Ibadet yerleri: "+acikMi(activities[9])+". Değişikliğe gitmek ister misiniz?",
+      "Ibadet yerleri: "+acikMi(activities[9])+"\nDeğişikliğe gitmek ister misiniz?",
       14,
       [
         [
@@ -215,7 +215,7 @@ void create_Questions() {
       "5"));
 
   questions.add(Questions(
-      "Alışveriş merkezleri: "+acikMi(activities[5])+". Değişikliğe gitmek ister misiniz?",
+      "Alışveriş merkezleri: "+acikMi(activities[5])+"\nDeğişikliğe gitmek ister misiniz?",
       15,
       [
         [
@@ -253,7 +253,7 @@ void create_Questions() {
    */
 
   questions.add(Questions(
-      "Düğün, nişan, kutlama gibi toplu aktiviteler:"+acikMi(activities[7])+" kisitlamalar getirilsin mi ? .",
+      "Düğün, nişan, kutlama gibi toplu aktiviteler:"+acikMi(activities[7])+"\nDeğişikliğe gitmek ister misiniz?",
       17,
       [
         [
@@ -268,7 +268,7 @@ void create_Questions() {
       "8"));
 
   questions.add(Questions(
-      "Sosyal mesafe ve hijyen kurallarina uymayanlara ve maske takmayanlara idari para cezasi uygulansin mi ? ",
+      "Sosyal mesafe, maske kural ihlallerinde idari para cezası uygulansın mı?",
       18,
       [
         [

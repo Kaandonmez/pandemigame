@@ -201,8 +201,8 @@ class _gamescreen extends State<gamescreen> {
                       Image.asset("assets/images/characters/" +
                           _swipeItems[index].content.askerImage +
                           ".png",
-                      width: MediaQuery.of(context).size.height*0.5,
-                      height: MediaQuery.of(context).size.height*0.5,)
+                      width: MediaQuery.of(context).size.height*0.45,
+                      height: MediaQuery.of(context).size.height*0.45,)
                     ]));
               },
               onStackFinished: () {
