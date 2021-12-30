@@ -1,5 +1,7 @@
 //import 'package:pandemic/utils/config.dart';
 
+import 'package:pandemigame/domain/model/activity.dart';
+
 import '../domain/model/questions.dart';
 import 'config.dart';
 
@@ -19,9 +21,18 @@ questions.add(Questions("Soru Stringi Buraya!!", Soruidsi buraya int olarak giri
 
  */ ///
 
+String acikMi(Activities activity){
+  if(activity.isActive){
+    return "açık";
+  }
+  else {
+    return "kapalı";
+  }
+}
+
 void create_Questions() {
   questions.add(Questions(
-      "Okullarda yuzyuze egitime gecilsin mi ?",
+      "Okullar: "+acikMi(activities[0])+". Değişikliğe gitmek ister misiniz?",
       0,
       [
         [
@@ -57,7 +68,7 @@ void create_Questions() {
       "12"));
 */
   questions.add(Questions(
-      "Asilama calismalarinin baslatilmasini istiyor musunuz ?",
+      "Aşılama çalışmaları: "+acikMi(activities[8])+". Değişikliğe gitmek ister misiniz?",
       4,
       [
         [
@@ -78,7 +89,7 @@ void create_Questions() {
       "2"));
 
   questions.add(Questions(
-      "Asilama yapabilmek icin gerekli olan ithalat iznini veriyor musunuz ?",
+      "Aşılama yapabilmek için gerekli olan ithalat iznini veriyor musunuz?",
       4,
       [
         [
@@ -93,7 +104,7 @@ void create_Questions() {
       "9"));
 
   questions.add(Questions(
-      "Vergi artirimi ile ekonomik seviye yukariya cekilsin mi ?",
+      "Vergi arttırımı yapılarak ile ekonomik seviye yukarı çekilsin mi?",
       5,
       [
         [
@@ -108,7 +119,7 @@ void create_Questions() {
       "3"));
 
   questions.add(Questions(
-      "Yabanci ulkelerden dis borc alarak ekonominize katki saglamayi planliyor musunuz?",
+      "Yabancı ülkelerden diş borç alarak ekonominize katkı sağlamak ister misiniz?",
       6,
       [
         [
@@ -123,7 +134,7 @@ void create_Questions() {
       "11"));
 
   questions.add(Questions(
-      "Sehirler ve ulkelerarasi yolculuklara sinirlama getirilsin mi ?",
+      "Şehirler ve ülkeler arası yolculuklar: "+acikMi(activities[2])+". Değişikliğe gitmek ister misiniz?",
       7,
       [
         [
@@ -144,7 +155,7 @@ void create_Questions() {
       "7"));
 
   questions.add(Questions(
-      "Spor musabakalarina kisitlama uygulamak amaciyla bir muddet ara verilsin mi ?",
+      "Spor müsabakaları: "+acikMi(activities[3])+". Değişikliğe gitmek ister misiniz?",
       9,
       [
         [
@@ -159,7 +170,7 @@ void create_Questions() {
       "10"));
 
   questions.add(Questions(
-      "Tip seviyenizi gelistirmeyi dusunuyor musunuz ?",
+      "Ekonomik maliyetini göze alarak tıp alanında geliştirmelere gitmek ister misiniz?",
       11,
       [
         [
@@ -174,7 +185,7 @@ void create_Questions() {
       "2"));
 
   questions.add(Questions(
-      "Ulkenizde asi uretim calismalarina baslansin mi ?",
+      "Yerli aşı çalışmalarına yatırım yapmak ister misiniz?",
       12,
       [
         [
@@ -189,22 +200,7 @@ void create_Questions() {
       "8"));
 
   questions.add(Questions(
-      "Ulkenizde bu yaz olimpiyatlar yapilmasi planlaniyor, onayliyor musunuz",
-      13,
-      [
-        [
-          18, // sırasıyla ekonomi , saglik , medical , hoşnutluk
-          0,
-          0,
-          22,
-          []
-        ], //!evet ise
-        [-5, 0, 0, -13, []] //  !hayır ise
-      ],
-      "5"));
-
-  questions.add(Questions(
-      "Ibadet yerleri halka kapatilsin mi ?",
+      "Ibadet yerleri: "+acikMi(activities[9])+". Değişikliğe gitmek ister misiniz?",
       14,
       [
         [
@@ -212,14 +208,14 @@ void create_Questions() {
           0,
           0,
           -0.45,
-          []
+          [activities[9]]
         ], //!evet ise
         [0, 0, 0, 0.1, []] //  !hayır ise
       ],
       "5"));
 
   questions.add(Questions(
-      "Supermarketlerin calisma saatleri en gec 17.00 olacak sekilde ayarlansin mi ? ",
+      "Alışveriş merkezleri: "+acikMi(activities[5])+". Değişikliğe gitmek ister misiniz?",
       15,
       [
         [
@@ -257,7 +253,7 @@ void create_Questions() {
    */
 
   questions.add(Questions(
-      "Dugun, nisan, kina gibi toplu eglencelere kisitlamalar getirilsin mi ? .",
+      "Düğün, nişan, kutlama gibi toplu aktiviteler:"+acikMi(activities[7])+" kisitlamalar getirilsin mi ? .",
       17,
       [
         [

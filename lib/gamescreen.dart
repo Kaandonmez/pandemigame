@@ -4,6 +4,7 @@ import 'package:pandemigame/domain/model/questions.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'utils/config.dart';
 import "dart:math";
+import '/domain/model/resources.dart';
 
 Random rnd = Random();
 
@@ -27,6 +28,10 @@ class gamescreen extends StatefulWidget {
 class _gamescreen extends State<gamescreen> {
   List<SwipeItem> _swipeItems = List<SwipeItem>();
   MatchEngine _matchEngine;
+  var health_level = resources.health_level;
+  var satisfaction_level = resources.satisfaction_level;
+  var economy_level = resources.economy_level;
+  var medical_level= resources.medical_level;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
@@ -36,7 +41,20 @@ class _gamescreen extends State<gamescreen> {
     Colors.yellow,
     Colors.orange
   ];
-
+  void reloadResources(){
+    setState(() {
+      health_level = resources.health_level;
+    });
+    setState(() {
+      satisfaction_level = resources.satisfaction_level;
+    });
+    setState(() {
+      economy_level = resources.economy_level;
+    });
+    setState(() {
+      medical_level= resources.medical_level;
+    });
+  }
   @override
   void initState() {
     for (int i = 0; i < _question.length; i++) {
@@ -47,9 +65,11 @@ class _gamescreen extends State<gamescreen> {
               askerImage: _question[i].askerImage),
           likeAction: () {
             _question[i].swipeYes();
+            reloadResources();
           },
           nopeAction: () {
             _question[i].swipeNo();
+            reloadResources();
           }));
     }
 
@@ -64,7 +84,26 @@ class _gamescreen extends State<gamescreen> {
         backgroundColor: Colors.grey[800],
         body: Container(
             child: Column(children: [
-          Container(height: 100,color: Colors.deepOrange),
+          Container(
+                height: 100,
+                color: Colors.deepOrange,
+              child: Row(
+                children: [
+                  Container(
+                    child: Text("Sağlık: "+health_level.toStringAsPrecision(3)),
+                  ),
+                  Container(
+                    child: Text("Memnuniyet: "+satisfaction_level.toStringAsPrecision(3)),
+                  ),
+                  Container(
+                    child: Text("Ekonomi: "+economy_level.toStringAsPrecision(3)),
+                  ),
+                  Container(
+                    child: Text("Medical: "+medical_level.toStringAsPrecision(3)),
+                  ),
+                ],
+              )
+          ),
           Container(
             height: 550,
             child: SwipeCards(

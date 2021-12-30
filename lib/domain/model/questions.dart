@@ -49,6 +49,12 @@ class Questions {
   }
 
   swipeYes() {
+    if(questionString.contains("açık")){
+      questionString.replaceAll("açık", "kapalı");
+    }
+    else {
+      questionString.replaceAll("kapalı", "açık");
+    }
     // ! ilgili kart yes kararına swipe edildikten sonra bu metot çağırılacak.
     // todo: oyunun kaybedildiğini anlamak için ressources kontrolü timeline içine eklenirse daha mantıklı olacaktır.
     //? burada sadece değerlerin belirli aralıklarda tutulması sağlanacak.

@@ -212,6 +212,7 @@ class Utils {
     activities.add(Activities("food", 1, true)); //6
     activities.add(Activities("ceremony", 1, true)); //7
     activities.add(Activities("start vaccination", 1, false)); //8
+    activities.add(Activities("worship", 1, true)); //9
   }
 
   void covidSpread() {
