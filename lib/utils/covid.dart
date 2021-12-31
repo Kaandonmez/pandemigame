@@ -22,18 +22,16 @@ import '../domain/model/human.dart';
   }
 
   void makeFamilyCovid(Family family) {
-    if(family.recoverDay==0){
-      positiveFamilies.add(family);
-      family.recoverDay = 2;
-      int counter = 0;
-      while (counter < family.members.length) {
-        family.members[counter].isCovid = true;
-        family.members[counter].getActivities().forEach((activity) {
-          activity.infectedHumans++;
-        });
-        counter++;
-        positiveCounter++;
-      }
+    positiveFamilies.add(family);
+    family.recoverDay = 2;
+    int counter = 0;
+    while (counter < family.members.length) {
+      family.members[counter].isCovid = true;
+      family.members[counter].getActivities().forEach((activity) {
+        activity.infectedHumans++;
+      });
+      counter++;
+      positiveCounter++;
     }
   }
 

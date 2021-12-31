@@ -214,16 +214,16 @@ import 'dart:math';
   }
 
   void createActivities() {
-    activities.add(Activities("school", 0.25, true)); // 0 remote 1 face 2 no
-    activities.add(Activities("work", 0.25, true)); //1
-    activities.add(Activities("travel", 0.25, true)); //2
-    activities.add(Activities("sports", 0.25, true)); //3
-    activities.add(Activities("cinema", 0.25, true)); //4
-    activities.add(Activities("shopping", 0.25, true)); //5
-    activities.add(Activities("food", 0.25, true)); //6
-    activities.add(Activities("ceremony", 0.25, true)); //7
-    activities.add(Activities("start vaccination", 0.25, false)); //8
-    activities.add(Activities("worship", 0.25, true)); //9
+    activities.add(Activities("school", 0.003, true)); // 0 remote 1 face 2 no
+    activities.add(Activities("work", 0.003, true)); //1
+    activities.add(Activities("travel", 0.003, true)); //2
+    activities.add(Activities("sports", 0.003, true)); //3
+    activities.add(Activities("cinema", 0.003, true)); //4
+    activities.add(Activities("shopping", 0.003, true)); //5
+    activities.add(Activities("food", 0.003, true)); //6
+    activities.add(Activities("ceremony", 0.003, true)); //7
+    activities.add(Activities("start vaccination", 0.003, false)); //8
+    activities.add(Activities("worship", 0.003, true)); //9
   }
 
   void createQuestions() {
@@ -241,20 +241,29 @@ import 'dart:math';
 
   void simulateOneWeek(){
     if(positiveFamilies.isNotEmpty){
+      print("döngü öncesi pozitif aile sayısı:");
+      print(positiveFamilies.length.toString());
       positiveFamilies.forEach((family) {
         if(--family.recoverDay == 0){
           getRidOfFamiliesCovid(family);
         }
       });
+      positiveFamilies.removeWhere((family) => family.recoverDay == 0);
+      print("döngü sonrası pozitif aile sayısı:");
+      print(positiveFamilies.length.toString());
     }
-    //positiveFamilies.removeWhere((family) => family.recoverDay == 0);
+    print("döngü öncesi pozitif insan sayısı:");
+    print(positiveCounter.toString());
     activities.forEach((activity) {
-      activity.familiesDo.forEach((familyDoes) {
-        if(rnd.nextDouble()<activity.getInfectionRate()){
-          makeFamilyCovid(familyDoes);
+      activity.familiesDo.forEach((family) {
+        double random = rnd.nextDouble();
+        if(family.recoverDay==0&&random<activity.getInfectionRate()){
+          makeFamilyCovid(family);
         }
       });
     });
+    print("döngü sonras pozitif insan sayısı:");
+    print(positiveCounter.toString());
   }
 
   void spendWeek() {}

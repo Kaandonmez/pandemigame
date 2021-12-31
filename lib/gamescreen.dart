@@ -33,6 +33,7 @@ class gameScreen extends State<gamescreen> {
   var satisfaction_level = resources.satisfaction_level;
   var economy_level = resources.economy_level;
   var medical_level = resources.medical_level;
+  var _positiveCounter = positiveCounter.toString();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
@@ -55,25 +56,31 @@ class gameScreen extends State<gamescreen> {
     setState(() {
       medical_level = resources.medical_level;
     });
+    setState(() {
+      _positiveCounter = positiveCounter.toString();
+    });
   }
 
   @override
   void initState() {
     simulateOneWeek();
-    for (int i = 0; i < _question.length; i++) {
-      _swipeItems.add(SwipeItem(
-          content: Content(
-              text: _question[i].questionString,
-              color: _colors[rnd.nextInt(5)],
-              askerImage: _question[i].askerImage),
-          likeAction: () {
-            _question[i].swipeYes();
-            reloadResources();
-          },
-          nopeAction: () {
-            _question[i].swipeNo();
-            reloadResources();
-          }));
+    reloadResources();
+    if(_swipeItems.isEmpty){
+      for (int i = 0; i < _question.length; i++) {
+        _swipeItems.add(SwipeItem(
+            content: Content(
+                text: _question[i].questionString,
+                color: _colors[rnd.nextInt(5)],
+                askerImage: _question[i].askerImage),
+            likeAction: () {
+              _question[i].swipeYes();
+              reloadResources();
+            },
+            nopeAction: () {
+              _question[i].swipeNo();
+              reloadResources();
+            }));
+      }
     }
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
     super.initState();
@@ -151,7 +158,7 @@ class gameScreen extends State<gamescreen> {
                     Divider(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Text(positiveCounter.toString(),style: const TextStyle(color: Colors.white),),
+                    Text(_positiveCounter,style: const TextStyle(color: Colors.white),),
                     const Divider(
                       height: 10,
                     ),

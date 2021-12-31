@@ -17,7 +17,7 @@ class Activities {
   }
 
   double getInfectionRate(){
-    return infectionRate+infectedHumans/20000;
+    return infectionRate+(infectionRate*infectedHumans/4200);
   }
 
   void incrementMemberCount() {
