@@ -254,12 +254,14 @@ void simulateOneWeek() {
   print("döngü öncesi pozitif insan sayısı:");
   print(positiveCounter.toString());
   activities.forEach((activity) {
-    activity.familiesDo.forEach((family) {
-      double random = rnd.nextDouble();
-      if (family.recoverDay == 0 && random < activity.getInfectionRate()) {
-        makeFamilyCovid(family);
-      }
-    });
+    if(activity.isActive){
+      activity.familiesDo.forEach((family) {
+        double random = rnd.nextDouble();
+        if (family.recoverDay == 0 && random < activity.getInfectionRate()) {
+          makeFamilyCovid(family);
+        }
+      });
+    }
   });
   print("döngü sonras pozitif insan sayısı:");
   print(positiveCounter.toString());
