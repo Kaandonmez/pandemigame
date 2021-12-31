@@ -17,7 +17,6 @@ class Family {
         Members[i].getActivities().forEach((activity) {
           if (activities.contains(activity) == false) {
             activities.add(activity);
-            activity.familiesDo.add(families[Id]);
           }
         });
         Members[i].setFamilyId(Id);

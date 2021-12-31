@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'utils/config.dart';
+import 'utils/utils.dart';
 
 void main() {
   gameStarter();
@@ -8,8 +9,8 @@ void main() {
 void gameStarter() {
   print("Please select game difficulty: " + difficultyOptions.toString());
   setDifficulty(stdin.readLineSync()!);
-  utils.createHumans(difficulty); //!create hobbie bunun içinde bulunuyor.
-  utils.createFamilies();
+  createHumans(difficulty); //!create hobbie bunun içinde bulunuyor.
+  createFamilies();
   //utils.covidSpread();
   //utils.createQuestions(); //! sorular create_questions içinde belirtildikten sonra hepsi burada oluşturuluyor.
 }

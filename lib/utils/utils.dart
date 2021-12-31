@@ -1,14 +1,14 @@
 import '/domain/model/resources.dart';
 
 import 'config.dart';
-import 'package:pandemigame/domain/model/covid.dart';
+import 'package:pandemigame/utils/covid.dart';
 import '/domain/model/family.dart';
 import '/domain/model/activity.dart';
 import '/domain/model/human.dart';
 import 'create_questions.dart';
 import 'dart:math';
 
-class Utils {
+
   var newZealandPopulationPyramide = [19.431, 64.201, 16.368];
   Random rnd = new Random();
 // todo: liste yeni aralıklarla düzenlenecek!
@@ -56,17 +56,17 @@ class Utils {
     switch (selectedDifficulty) {
       case "easy":
         {
-          populationPyramide = utils.getNewZealandPopulationPyramide();
+          populationPyramide = getNewZealandPopulationPyramide();
           break;
         }
       case "medium":
         {
-          populationPyramide = utils.getTurkeyPopulationPyramide();
+          populationPyramide = getTurkeyPopulationPyramide();
           break;
         }
       case "hard":
         {
-          populationPyramide = utils.getIndiaPopulationPyramide();
+          populationPyramide = getIndiaPopulationPyramide();
         }
     }
     print("insanlar oluşturuluyor");
@@ -202,7 +202,9 @@ class Utils {
         counter_adult++;
         counter_old++;
       }
-
+      families[counter_family].activities.forEach((activity) {
+        activity.familiesDo.add(families[counter_family]);
+      });
       counter_family++;
     }
     print("aileler oluşturuldu");
@@ -212,16 +214,16 @@ class Utils {
   }
 
   void createActivities() {
-    activities.add(Activities("school", 0.54, true)); // 0 remote 1 face 2 no
-    activities.add(Activities("work", 0.45, true)); //1
-    activities.add(Activities("travel", 1, true)); //2
-    activities.add(Activities("sports", 1, true)); //3
-    activities.add(Activities("cinema", 1, true)); //4
-    activities.add(Activities("shopping", 1, true)); //5
-    activities.add(Activities("food", 1, true)); //6
-    activities.add(Activities("ceremony", 1, true)); //7
-    activities.add(Activities("start vaccination", 1, false)); //8
-    activities.add(Activities("worship", 1, true)); //9
+    activities.add(Activities("school", 0.25, true)); // 0 remote 1 face 2 no
+    activities.add(Activities("work", 0.25, true)); //1
+    activities.add(Activities("travel", 0.25, true)); //2
+    activities.add(Activities("sports", 0.25, true)); //3
+    activities.add(Activities("cinema", 0.25, true)); //4
+    activities.add(Activities("shopping", 0.25, true)); //5
+    activities.add(Activities("food", 0.25, true)); //6
+    activities.add(Activities("ceremony", 0.25, true)); //7
+    activities.add(Activities("start vaccination", 0.25, false)); //8
+    activities.add(Activities("worship", 0.25, true)); //9
   }
 
   void createQuestions() {
@@ -238,19 +240,22 @@ class Utils {
   }
 
   void simulateOneWeek(){
-    positiveFamilies().forEach((family) {
-      if(--family.recoverDay == 0){
-        covid.getRidOfFamiliesCovid(family);
-      }
-    });
+    if(positiveFamilies.isNotEmpty){
+      positiveFamilies.forEach((family) {
+        if(--family.recoverDay == 0){
+          getRidOfFamiliesCovid(family);
+        }
+      });
+    }
+    //positiveFamilies.removeWhere((family) => family.recoverDay == 0);
     activities.forEach((activity) {
       activity.familiesDo.forEach((familyDoes) {
         if(rnd.nextDouble()<activity.getInfectionRate()){
-          covid.makeFamilyCovid(familyDoes);
+          makeFamilyCovid(familyDoes);
         }
       });
     });
   }
 
   void spendWeek() {}
-}
+

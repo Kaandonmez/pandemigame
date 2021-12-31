@@ -1,12 +1,12 @@
 //@dart=2.9
 import 'package:flutter/material.dart';
 import 'package:pandemigame/domain/model/questions.dart';
-import 'package:pandemigame/utils/create_questions.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'utils/config.dart';
 import "dart:math";
 import 'package:percent_indicator/percent_indicator.dart';
-import '/domain/model/covid.dart';
+import 'utils/covid.dart';
+import 'utils/utils.dart';
 
 Random rnd = Random();
 class Content {
@@ -59,15 +59,11 @@ class gameScreen extends State<gamescreen> {
 
   @override
   void initState() {
+    simulateOneWeek();
     for (int i = 0; i < _question.length; i++) {
-      var questionText = _question[i].questionString;
-      if (_question[i].effectActivities.isNotEmpty) {
-        questionText = _question[i].questionString.replaceAll(
-            "&aktifmi&", acikMi(_question[i].effectActivities.first));
-      }
       _swipeItems.add(SwipeItem(
           content: Content(
-              text: questionText,
+              text: _question[i].questionString,
               color: _colors[rnd.nextInt(5)],
               askerImage: _question[i].askerImage),
           likeAction: () {
@@ -155,7 +151,7 @@ class gameScreen extends State<gamescreen> {
                     Divider(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Text(covid.positiveCounter),
+                    Text(positiveCounter.toString(),style: const TextStyle(color: Colors.white),),
                     const Divider(
                       height: 10,
                     ),

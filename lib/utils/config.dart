@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:pandemigame/utils/covid.dart';
+
 import '/domain/model/activity.dart';
 import '/domain/model/family.dart';
 import '/domain/model/human.dart';
@@ -10,13 +12,11 @@ import 'utils.dart';
 
 String difficulty = "easy";
 List difficultyOptions = ["easy", "medium", "hard"];
-var utils = Utils();
 List<Human> humans = [];
 List<Family> families = [];
 List<Activities> activities = [];
 var populationPyramide = [];
 var rnd = Random();
-var covid = [];
 List<Questions> questions = [];
 int familyCounter = 0;
 int chance = 0;
