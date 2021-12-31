@@ -1,4 +1,6 @@
 import 'package:pandemigame/domain/model/family.dart';
+import 'package:pandemigame/utils/config.dart';
+import 'dart:math';
 
 class Activities {
   String name = "";
@@ -16,8 +18,9 @@ class Activities {
     //! hobiler humanlar oluşturulurken ekleniyor ancak hobiler 1 kere create ediliyor memberCount şuan gereksiz.
   }
 
-  double getInfectionRate(){
-    return infectionRate+(infectionRate*infectedHumans/4200);
+  double getInfectionRate() {
+    return infectionRate + (infectionRate * infectedHumans / 678);
+    //return infectionRate;
   }
 
   void incrementMemberCount() {
