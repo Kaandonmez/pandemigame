@@ -33,7 +33,7 @@ class gameScreen extends State<gamescreen> {
   var satisfaction_level = resources.satisfaction_level;
   var economy_level = resources.economy_level;
   var medical_level = resources.medical_level;
-  var _positiveCounter = positiveCounter.toString();
+  var _positiveCounter = positiveCounter;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
@@ -57,7 +57,7 @@ class gameScreen extends State<gamescreen> {
       medical_level = resources.medical_level;
     });
     setState(() {
-      _positiveCounter = positiveCounter.toString();
+      _positiveCounter = positiveCounter;
     });
   }
 
@@ -129,7 +129,7 @@ class gameScreen extends State<gamescreen> {
                     LinearPercentIndicator(
                       width: MediaQuery.of(context).size.width - 40,
                       lineHeight: MediaQuery.of(context).size.height * 0.03,
-                      percent: satisfaction_level,
+                      percent: satisfaction_level / 100,
                       backgroundColor: Colors.grey,
                       progressColor: Colors.blue,
                       leading: RichText(
@@ -158,7 +158,19 @@ class gameScreen extends State<gamescreen> {
                     Divider(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Text(_positiveCounter,style: const TextStyle(color: Colors.white),),
+                    LinearPercentIndicator(
+                      width: MediaQuery.of(context).size.width - 40,
+                      lineHeight: MediaQuery.of(context).size.height * 0.03,
+                      percent: _positiveCounter/80400,
+                      backgroundColor: Colors.grey,
+                      progressColor: Colors.blue,
+                      leading: RichText(
+                          text: WidgetSpan(
+                              child: Icon(
+                                Icons.local_hospital_rounded,
+                                color: Colors.red[600],
+                              ))),
+                    ),
                     const Divider(
                       height: 10,
                     ),

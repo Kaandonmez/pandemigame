@@ -8,14 +8,14 @@ class Human {
   String name = ""; // todo: sonradan çıkarılacak.
   String surname = "";
   num age = 0;
-  List<Activities> _activities = [];
+  List<Activities> activitiesDo = [];
   int familyId = 0;
   bool isCovid = false;
   num health = 0; // ! hastalık sınıfı etki edecek dikkat!
   bool? isVaccinated; //! diğer kodda daha farklı tipteydi dikkat.
   //bool isGetOverCorona = false;
   int antibody = 0;
-  num? satisfaction;
+  num satisfaction = 0;
   //int memberType = 0; //? 0'sa çocuk 1 se yetişkin 2 ise yaşlı
   bool isAlive = true;
 
@@ -30,11 +30,11 @@ class Human {
 
     if (age < 5) {
       health = 95 + rnd.nextInt(6);
-      satisfaction = null;
+      satisfaction = 50 + rnd.nextInt(50);
       sensitivity = (70 + rnd.nextInt(31)) / 100;
     } else if (age < 14) {
       health = 95 + rnd.nextInt(6);
-      satisfaction = null;
+      satisfaction = 50 + rnd.nextInt(50);
       sensitivity = (50 + rnd.nextInt(51)) / 100;
       setActivities([
         activities[0],
@@ -139,10 +139,10 @@ class Human {
 
   void setActivities(List<Activities> Activities) {
     for (var activity in Activities) {
-      if (_activities.contains(activity)) {
+      if (activitiesDo.contains(activity)) {
         print("already added" + activity.toString());
       } else {
-        _activities.add(activity);
+        activitiesDo.add(activity);
         activity.incrementMemberCount();
       }
     }
@@ -176,14 +176,14 @@ class Human {
   }
 
   List<Activities> getActivities() {
-    return _activities;
+    return activitiesDo;
   }
 
   void deleteActivity(Activities act) {
-    if (_activities.contains(act)) {
+    if (activitiesDo.contains(act)) {
       act.decrementMemberCount();
     }
-    _activities.remove(act);
+    activitiesDo.remove(act);
   }
 
   void makeDead() {

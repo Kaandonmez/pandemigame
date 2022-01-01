@@ -65,8 +65,6 @@ class Questions {
     resources.economy_level += ifYes[0];
     resources.health_level += ifYes[1];
     resources.medical_level += ifYes[2];
-    resources.satisfaction_level += ifYes[3];
-    //sırasıyla->>>> school vaci sport sinem trvl shop food
 
     if (resources.economy_level > 1.0) {
       resources.economy_level = 1.0;
@@ -83,23 +81,37 @@ class Questions {
     } else if (resources.medical_level < 0) {
       resources.medical_level = 0.0;
     }
-    if (resources.satisfaction_level > 1.0) {
-      resources.satisfaction_level = 1.0;
-    } else if (resources.satisfaction_level < 0) {
-      resources.satisfaction_level = 0.0;
-    }
 
     print("resources.economy_level: " + resources.economy_level.toString());
     print("resources.health_level: " + resources.health_level.toString());
     print("resources.medical_level: " + resources.medical_level.toString());
-    print("resources.satisfaction_level: " +
-        resources.satisfaction_level.toString());
 
-    List<Activities> changeStatusActivities = effectActivities;
-    changeStatusActivities.forEach((activity) {
+    num changeSaticfaction = 0;
+    effectActivities.forEach((activity) {
       activity.changeStatus();
+      activity.familiesDo.forEach((family) {
+        family.members.forEach((human) {
+          num satisfactionRate = ifYes[3];
+          if(human.activitiesDo.contains(activity)){
+            changeSaticfaction -= human.satisfaction;
+            human.satisfaction += satisfactionRate;
+            if (human.satisfaction > 100) {
+              human.satisfaction = 100.0;
+            } else if (human.satisfaction < 0) {
+              human.satisfaction = 0.0;
+            }
+            changeSaticfaction += human.satisfaction;
+          }
+        });
+      });
       print(activity.toString());
     });
+    resources.totalSatifaction += changeSaticfaction;
+    resources.setAverageSatisfaction();
+
+
+    print("resources.satisfaction_level: " +
+        resources.satisfaction_level.toString());
   }
 
   swipeNo() {
@@ -114,7 +126,6 @@ class Questions {
     resources.economy_level += ifNo[0];
     resources.health_level += ifNo[1];
     resources.medical_level += ifNo[2];
-    resources.satisfaction_level += ifNo[3];
 
     //sırasıyla->>>> school vaci sport sinem trvl shop food
 
@@ -133,14 +144,34 @@ class Questions {
     } else if (resources.medical_level < 0) {
       resources.medical_level = 0.0;
     }
-    if (resources.satisfaction_level > 1.0) {
-      resources.satisfaction_level = 1.0;
-    } else if (resources.satisfaction_level < 0) {
-      resources.satisfaction_level = 0.0;
-    }
+
     print("resources.economy_level: " + resources.economy_level.toString());
     print("resources.health_level: " + resources.health_level.toString());
     print("resources.medical_level: " + resources.medical_level.toString());
+
+    num changeSaticfaction = 0;
+    effectActivities.forEach((activity) {
+      activity.familiesDo.forEach((family) {
+        family.members.forEach((human) {
+          num satisfactionRate = ifYes[3];
+          if(human.activitiesDo.contains(activity)){
+            changeSaticfaction -= human.satisfaction;
+            human.satisfaction += satisfactionRate;
+            if (human.satisfaction > 100) {
+              human.satisfaction = 100.0;
+            } else if (human.satisfaction < 0) {
+              human.satisfaction = 0.0;
+            }
+            changeSaticfaction += human.satisfaction;
+          }
+        });
+      });
+      print(activity.toString());
+    });
+    resources.totalSatifaction += changeSaticfaction;
+    resources.setAverageSatisfaction();
+
+
     print("resources.satisfaction_level: " +
         resources.satisfaction_level.toString());
   }

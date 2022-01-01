@@ -31,7 +31,7 @@ String acikMi(Activities activity) {
 
 void create_Questions() {
   questions.add(Questions(
-      "Okullar: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Okulların durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       0,
       [
         [
@@ -67,7 +67,7 @@ void create_Questions() {
       "12"));
 */
   questions.add(Questions(
-      "Aşılama çalışmaları: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Aşılama çalışmalarının durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       4,
       [
         [
@@ -133,7 +133,7 @@ void create_Questions() {
       []));
 
   questions.add(Questions(
-      "Şehirler ve ülkeler arası yolculuklar: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Şehirler ve ülkeler arası yolculukların durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       7,
       [
         [
@@ -153,7 +153,7 @@ void create_Questions() {
       [activities[2]]));
 
   questions.add(Questions(
-      "Spor müsabakaları: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Spor müsabakalarının durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       9,
       [
         [
@@ -198,7 +198,7 @@ void create_Questions() {
       []));
 
   questions.add(Questions(
-      "Ibadet yerleri: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Ibadet yerlerinin durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       14,
       [
         [
@@ -213,7 +213,7 @@ void create_Questions() {
       [activities[9]]));
 
   questions.add(Questions(
-      "Alışveriş merkezleri: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Alışveriş merkezlerinin durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       15,
       [
         [
@@ -252,7 +252,7 @@ void create_Questions() {
    */
 
   questions.add(Questions(
-      "Düğün, nişan, kutlama gibi toplu aktiviteler: &aktifmi& \nDeğişikliğe gitmek ister misiniz?",
+      "Düğün, nişan, kutlama gibi toplu aktivitelerin durumu ile ilgili bir değişikliğe gitmek ister misiniz?",
       17,
       [
         [

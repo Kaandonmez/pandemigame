@@ -207,6 +207,14 @@ void createFamilies() {
     counter_family++;
   }
   print("aileler oluşturuldu");
+
+  families.forEach((family) {
+    family.members.forEach((human) {
+      resources.totalSatifaction += human.satisfaction;
+      resources.counterHumansHaveFamily++;
+    });
+  });
+  resources.setAverageSatisfaction();
   /*for (var family in families) {
       print(family);
     }*/
@@ -263,7 +271,7 @@ void simulateOneWeek() {
       });
     }
   });
-  print("döngü sonras pozitif insan sayısı:");
+  print("döngü sonrası pozitif insan sayısı:");
   print(positiveCounter.toString());
 }
 
