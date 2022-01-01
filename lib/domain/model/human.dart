@@ -64,7 +64,7 @@ class Human {
       health = 85 + rnd.nextInt(16);
       satisfaction = 50 + rnd.nextInt(31);
       sensitivity = (15 + rnd.nextInt(56)) / 100;
-      setActivities([activities[1], activities[5], activities[2]]);
+      setActivities([activities[1], activities[5], activities[2], activities[8]]);
       if (rand.nextDouble() < 0.01) {
         setActivities([activities[7]]);
       }
@@ -78,7 +78,7 @@ class Human {
       health = 75 + rnd.nextInt(16);
       satisfaction = 60 + rnd.nextInt(21);
       sensitivity = (10 + rnd.nextInt(66)) / 100;
-      setActivities([activities[1]]);
+      setActivities([activities[1], activities[8]]);
       if (rand.nextDouble() < 0.50) {
         setActivities([activities[5]]);
       }
@@ -95,6 +95,7 @@ class Human {
       health = 65 + rnd.nextInt(16);
       satisfaction = 70 + rnd.nextInt(21);
       sensitivity = (45 + rnd.nextInt(51)) / 100;
+      setActivities([activities[8]]);
       if (rand.nextDouble() < 0.04) {
         setActivities([activities[1]]);
       }
@@ -111,6 +112,7 @@ class Human {
       health = 55 + rnd.nextInt(16);
       satisfaction = 65 + rnd.nextInt(31);
       sensitivity = (55 + rnd.nextInt(36)) / 100;
+      setActivities([activities[8]]);
       if (rand.nextDouble() < 0.02) {
         setActivities([activities[7]]);
       }

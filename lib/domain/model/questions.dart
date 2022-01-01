@@ -13,6 +13,7 @@ import '../../utils/config.dart';
  */ ///
 
 class Questions {
+  bool? isSwipeNoFirst = null;
   var questionString = "";
 
   int? questionId;
@@ -62,117 +63,167 @@ class Questions {
     print("ex resources.satisfaction_level: " +
         resources.satisfaction_level.toString());
 
-    resources.economy_level += ifYes[0];
-    resources.health_level += ifYes[1];
-    resources.medical_level += ifYes[2];
+    if(effectActivities.isNotEmpty){
+      num changeSaticfaction = 0;
+      effectActivities.forEach((activity) {
+        activity.changeStatus();
+        activity.familiesDo.forEach((family) {
+          num satisfactionRate = activity.isActive ? ifYes[3] : ifNo[3];
+          family.members.forEach((human) {
+            if(human.activitiesDo.contains(activity)){
+              changeSaticfaction -= human.satisfaction;
+              human.satisfaction += satisfactionRate;
+              if (human.satisfaction > 100) {
+                human.satisfaction = 100.0;
+              } else if (human.satisfaction <= 0) {
+                human.satisfaction = 0.0;
+              }
+              changeSaticfaction += human.satisfaction;
+            }
+          });
+        });
+        print(activity.toString());
+      });
+      resources.totalSatifaction += changeSaticfaction;
+      resources.setAverageSatisfaction();
+
+      print("resources.satisfaction_level: " +
+          resources.satisfaction_level.toString());
+
+      if(effectActivities.first.isActive){
+        resources.economy_level += ifYes[0];
+        resources.health_level += ifYes[1];
+        resources.medical_level += ifYes[2];
+      }
+      else {
+        resources.economy_level += ifNo[0];
+        resources.health_level += ifNo[1];
+        resources.medical_level += ifNo[2];
+      }
+    }
+    else {
+      num changeSaticfaction = 0;
+      families.forEach((family) {
+        num satisfactionRate = 0;
+        if(isSwipeNoFirst!=null){
+          satisfactionRate = ifNo[3];
+        }
+        else{
+          satisfactionRate = ifYes[3];
+        }
+        family.members.forEach((human) {
+          changeSaticfaction -= human.satisfaction;
+          human.satisfaction += satisfactionRate;
+          if (human.satisfaction > 100) {
+            human.satisfaction = 100.0;
+          } else if (human.satisfaction <= 0) {
+            human.satisfaction = 0.0;
+          }
+          changeSaticfaction += human.satisfaction;
+        });
+      });
+      resources.totalSatifaction += changeSaticfaction;
+      resources.setAverageSatisfaction();
+
+      if(isSwipeNoFirst != null){
+        resources.economy_level += ifNo[0];
+        resources.health_level += ifNo[1];
+        resources.medical_level += ifNo[2];
+      }
+      else {
+        resources.economy_level += ifYes[0];
+        resources.health_level += ifYes[1];
+        resources.medical_level += ifYes[2];
+      }
+      isSwipeNoFirst = null;
+    }
 
     if (resources.economy_level > 1.0) {
       resources.economy_level = 1.0;
-    } else if (resources.economy_level < 0) {
+    } else if (resources.economy_level <= 0) {
       resources.economy_level = 0.0;
     }
     if (resources.health_level > 1.0) {
       resources.health_level = 1.0;
-    } else if (resources.health_level < 0) {
+    } else if (resources.health_level <= 0) {
       resources.health_level = 0.0;
     }
     if (resources.medical_level > 1.0) {
       resources.medical_level = 1.0;
-    } else if (resources.medical_level < 0) {
+    } else if (resources.medical_level <= 0) {
       resources.medical_level = 0.0;
     }
 
     print("resources.economy_level: " + resources.economy_level.toString());
     print("resources.health_level: " + resources.health_level.toString());
     print("resources.medical_level: " + resources.medical_level.toString());
-
-    num changeSaticfaction = 0;
-    effectActivities.forEach((activity) {
-      activity.changeStatus();
-      activity.familiesDo.forEach((family) {
-        family.members.forEach((human) {
-          num satisfactionRate = ifYes[3];
-          if(human.activitiesDo.contains(activity)){
-            changeSaticfaction -= human.satisfaction;
-            human.satisfaction += satisfactionRate;
-            if (human.satisfaction > 100) {
-              human.satisfaction = 100.0;
-            } else if (human.satisfaction < 0) {
-              human.satisfaction = 0.0;
-            }
-            changeSaticfaction += human.satisfaction;
-          }
-        });
-      });
-      print(activity.toString());
-    });
-    resources.totalSatifaction += changeSaticfaction;
-    resources.setAverageSatisfaction();
-
-
-    print("resources.satisfaction_level: " +
-        resources.satisfaction_level.toString());
   }
 
   swipeNo() {
-    // ! ilgili kart no kararına swipe edildikten sonra bu metot çağırılacak.
-    //? burada sadece değerlerin belirli aralıklarda tutulması sağlanacak.
-    print("ex resources.economy_level: " + resources.economy_level.toString());
-    print("ex resources.health_level: " + resources.health_level.toString());
-    print("ex resources.medical_level: " + resources.medical_level.toString());
-    print("ex resources.satisfaction_level: " +
-        resources.satisfaction_level.toString());
+    if(effectActivities.isNotEmpty){
+      // ! ilgili kart no kararına swipe edildikten sonra bu metot çağırılacak.
+      //? burada sadece değerlerin belirli aralıklarda tutulması sağlanacak.
+      print("ex resources.economy_level: " + resources.economy_level.toString());
+      print("ex resources.health_level: " + resources.health_level.toString());
+      print("ex resources.medical_level: " + resources.medical_level.toString());
+      print("ex resources.satisfaction_level: " +
+          resources.satisfaction_level.toString());
 
-    resources.economy_level += ifNo[0];
-    resources.health_level += ifNo[1];
-    resources.medical_level += ifNo[2];
+      resources.economy_level += ifNo[0];
+      resources.health_level += ifNo[1];
+      resources.medical_level += ifNo[2];
 
-    //sırasıyla->>>> school vaci sport sinem trvl shop food
+      //sırasıyla->>>> school vaci sport sinem trvl shop food
 
-    if (resources.economy_level > 1.0) {
-      resources.economy_level = 1.0;
-    } else if (resources.economy_level < 0) {
-      resources.economy_level = 0.0;
-    }
-    if (resources.health_level > 1.0) {
-      resources.health_level = 1.0;
-    } else if (resources.health_level < 0) {
-      resources.health_level = 0.0;
-    }
-    if (resources.medical_level > 1.0) {
-      resources.medical_level = 1.0;
-    } else if (resources.medical_level < 0) {
-      resources.medical_level = 0.0;
-    }
+      if (resources.economy_level > 1.0) {
+        resources.economy_level = 1.0;
+      } else if (resources.economy_level <= 0) {
+        resources.economy_level = 0.0;
+      }
+      if (resources.health_level > 1.0) {
+        resources.health_level = 1.0;
+      } else if (resources.health_level <= 0) {
+        resources.health_level = 0.0;
+      }
+      if (resources.medical_level > 1.0) {
+        resources.medical_level = 1.0;
+      } else if (resources.medical_level <= 0) {
+        resources.medical_level = 0.0;
+      }
 
-    print("resources.economy_level: " + resources.economy_level.toString());
-    print("resources.health_level: " + resources.health_level.toString());
-    print("resources.medical_level: " + resources.medical_level.toString());
+      print("resources.economy_level: " + resources.economy_level.toString());
+      print("resources.health_level: " + resources.health_level.toString());
+      print("resources.medical_level: " + resources.medical_level.toString());
 
-    num changeSaticfaction = 0;
-    effectActivities.forEach((activity) {
-      activity.familiesDo.forEach((family) {
-        family.members.forEach((human) {
-          num satisfactionRate = ifYes[3];
-          if(human.activitiesDo.contains(activity)){
-            changeSaticfaction -= human.satisfaction;
-            human.satisfaction += satisfactionRate;
-            if (human.satisfaction > 100) {
-              human.satisfaction = 100.0;
-            } else if (human.satisfaction < 0) {
-              human.satisfaction = 0.0;
+      num changeSaticfaction = 0;
+      effectActivities.forEach((activity) {
+        activity.familiesDo.forEach((family) {
+          family.members.forEach((human) {
+            num satisfactionRate = ifNo[3];
+            if(human.activitiesDo.contains(activity)){
+              changeSaticfaction -= human.satisfaction;
+              human.satisfaction += satisfactionRate;
+              if (human.satisfaction > 100) {
+                human.satisfaction = 100.0;
+              } else if (human.satisfaction <= 0) {
+                human.satisfaction = 0.0;
+              }
+              changeSaticfaction += human.satisfaction;
             }
-            changeSaticfaction += human.satisfaction;
-          }
+          });
         });
+        print(activity.toString());
       });
-      print(activity.toString());
-    });
-    resources.totalSatifaction += changeSaticfaction;
-    resources.setAverageSatisfaction();
+      resources.totalSatifaction += changeSaticfaction;
+      resources.setAverageSatisfaction();
 
 
-    print("resources.satisfaction_level: " +
-        resources.satisfaction_level.toString());
+      print("resources.satisfaction_level: " +
+          resources.satisfaction_level.toString());
+    }
+    else {
+      isSwipeNoFirst = true;
+      swipeYes();
+    }
   }
 }

@@ -35,12 +35,12 @@ void create_Questions() {
       0,
       [
         [
-          -0.05, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.1, // sırasıyla ekonomi , saglik , medical , hoşnutluk AÇILIRSA
           0.05,
           0,
           -60
         ], //!evet ise
-        [0, 0, 0, 0] //  !hayır ise
+        [0.05, -0.05, 0, 50] //  KAPANIRSA - DURUMU DEĞİŞMEZSE
       ],
       "7",
       [activities[0]]));
@@ -72,16 +72,16 @@ void create_Questions() {
       [
         [
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
-          0.15,
           0,
-          75
-        ], //!evet ise
+          0,
+          25
+        ], //AÇILIRSA
         [
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
           -30
-        ] //  !hayır ise
+        ] //  KAPANIRSA - AYNI KALIRSA
       ],
       "2",
       [activities[8]]));
@@ -91,12 +91,12 @@ void create_Questions() {
       4,
       [
         [
-          -0.24, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.24, // sırasıyla ekonomi , saglik , medical , hoşnutluk EVET
           0,
           0,
-          13
+          25
         ], //!evet ise
-        [0, 0, 0, 11] //  !hayır ise
+        [0, 0, 0, -5] //  hayırsa
       ],
       "9",
       []));
@@ -111,7 +111,7 @@ void create_Questions() {
           0,
           -21
         ], //!evet ise
-        [0, 0, 0, 30] //  !hayır ise
+        [0, 0, 0, 5] //  !hayır ise
       ],
       "3",
       []));
@@ -121,12 +121,12 @@ void create_Questions() {
       6,
       [
         [
-          0.1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
-          0,
-          0,
-          -10
+          0.2, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          0.0,
+          0.0,
+          -15
         ], //!evet ise
-        [0, 1.0, 0.18, 30] //  !hayır ise
+        [0.0, 0.0, 0.0, 5] //  !hayır ise
       ],
       "11",
       []));
@@ -136,13 +136,13 @@ void create_Questions() {
       7,
       [
         [
-          -1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
           -50
         ], //!evet ise
         [
-          1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          0.15, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
           30
@@ -156,12 +156,12 @@ void create_Questions() {
       9,
       [
         [
-          -1.7, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.1, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -90
+          -30
         ], //!evet ise
-        [0.8, 0, 0, 20] //  !hayır ise
+        [0.1, 0, 0, 35] //  !hayır ise
       ],
       "10",
       [activities[3]]));
@@ -171,10 +171,10 @@ void create_Questions() {
       11,
       [
         [
-          -1.9, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.2, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
-          2.6,
-          40
+          0.2,
+          10
         ], //!evet ise
         [0, 0, 0, -5] //  !hayır ise
       ],
@@ -189,7 +189,7 @@ void create_Questions() {
           -0.05, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          30
+          5
         ], //!evet ise
         [0, 0, 0, -5] //  !hayır ise
       ],
@@ -204,9 +204,9 @@ void create_Questions() {
           0, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -45
+          -30
         ], //!evet ise
-        [0, 0, 0, 10] //  !hayır ise
+        [0, 0, 0, 15] //  !hayır ise
       ],
       "5",
       [activities[9]]));
@@ -219,9 +219,9 @@ void create_Questions() {
           -0.15, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -10
+          -20
         ], //!evet ise
-        [0.1, 0, 0, 5] //  !hayır ise
+        [0.2, 0, 0, 15] //  !hayır ise
       ],
       "10",
       [activities[5]]));
@@ -255,10 +255,10 @@ void create_Questions() {
       17,
       [
         [
-          -0.25, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          -0.09, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -15
+          -20
         ], //!evet ise
         [0.1, 0, 0, 20] //  !hayır ise
       ],
@@ -270,12 +270,12 @@ void create_Questions() {
       18,
       [
         [
-          0.15, // sırasıyla ekonomi , saglik , medical , hoşnutluk
+          0.11, // sırasıyla ekonomi , saglik , medical , hoşnutluk
           0,
           0,
-          -40
+          -15
         ], //!evet ise
-        [0, 0, 0, 10] //  !hayır ise
+        [0, 0, 0, 15] //  !hayır ise
       ],
       "5",
       []));
