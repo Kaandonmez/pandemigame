@@ -151,7 +151,7 @@ class gameScreen extends State<gamescreen> {
                       leading: RichText(
                           text: WidgetSpan(
                               child: Icon(
-                        Icons.local_hospital_rounded,
+                        Icons.health_and_safety_rounded,
                         color: Colors.red[600],
                       ))),
                     ),
