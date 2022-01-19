@@ -63,14 +63,14 @@ class Questions {
     print("ex resources.satisfaction_level: " +
         resources.satisfaction_level.toString());
 
-    if(effectActivities.isNotEmpty){
+    if (effectActivities.isNotEmpty) {
       num changeSaticfaction = 0;
       effectActivities.forEach((activity) {
         activity.changeStatus();
         activity.familiesDo.forEach((family) {
           num satisfactionRate = activity.isActive ? ifYes[3] : ifNo[3];
           family.members.forEach((human) {
-            if(human.activitiesDo.contains(activity)){
+            if (human.activitiesDo.contains(activity)) {
               changeSaticfaction -= human.satisfaction;
               human.satisfaction += satisfactionRate;
               if (human.satisfaction > 100) {
@@ -90,25 +90,22 @@ class Questions {
       print("resources.satisfaction_level: " +
           resources.satisfaction_level.toString());
 
-      if(effectActivities.first.isActive){
+      if (effectActivities.first.isActive) {
         resources.economy_level += ifYes[0];
         resources.health_level += ifYes[1];
         resources.medical_level += ifYes[2];
-      }
-      else {
+      } else {
         resources.economy_level += ifNo[0];
         resources.health_level += ifNo[1];
         resources.medical_level += ifNo[2];
       }
-    }
-    else {
+    } else {
       num changeSaticfaction = 0;
       families.forEach((family) {
         num satisfactionRate = 0;
-        if(isSwipeNoFirst!=null){
+        if (isSwipeNoFirst != null) {
           satisfactionRate = ifNo[3];
-        }
-        else{
+        } else {
           satisfactionRate = ifYes[3];
         }
         family.members.forEach((human) {
@@ -125,12 +122,11 @@ class Questions {
       resources.totalSatifaction += changeSaticfaction;
       resources.setAverageSatisfaction();
 
-      if(isSwipeNoFirst != null){
+      if (isSwipeNoFirst != null) {
         resources.economy_level += ifNo[0];
         resources.health_level += ifNo[1];
         resources.medical_level += ifNo[2];
-      }
-      else {
+      } else {
         resources.economy_level += ifYes[0];
         resources.health_level += ifYes[1];
         resources.medical_level += ifYes[2];
@@ -160,12 +156,14 @@ class Questions {
   }
 
   swipeNo() {
-    if(effectActivities.isNotEmpty){
+    if (effectActivities.isNotEmpty) {
       // ! ilgili kart no kararına swipe edildikten sonra bu metot çağırılacak.
       //? burada sadece değerlerin belirli aralıklarda tutulması sağlanacak.
-      print("ex resources.economy_level: " + resources.economy_level.toString());
+      print(
+          "ex resources.economy_level: " + resources.economy_level.toString());
       print("ex resources.health_level: " + resources.health_level.toString());
-      print("ex resources.medical_level: " + resources.medical_level.toString());
+      print(
+          "ex resources.medical_level: " + resources.medical_level.toString());
       print("ex resources.satisfaction_level: " +
           resources.satisfaction_level.toString());
 
@@ -200,7 +198,7 @@ class Questions {
         activity.familiesDo.forEach((family) {
           family.members.forEach((human) {
             num satisfactionRate = ifNo[3];
-            if(human.activitiesDo.contains(activity)){
+            if (human.activitiesDo.contains(activity)) {
               changeSaticfaction -= human.satisfaction;
               human.satisfaction += satisfactionRate;
               if (human.satisfaction > 100) {
@@ -217,11 +215,9 @@ class Questions {
       resources.totalSatifaction += changeSaticfaction;
       resources.setAverageSatisfaction();
 
-
       print("resources.satisfaction_level: " +
           resources.satisfaction_level.toString());
-    }
-    else {
+    } else {
       isSwipeNoFirst = true;
       swipeYes();
     }

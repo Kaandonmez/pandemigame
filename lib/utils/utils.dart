@@ -222,14 +222,14 @@ void createFamilies() {
 
 void createActivities() {
   activities.add(Activities("school", 0.01, true)); // 0 remote 1 face 2 no
-  activities.add(Activities("work", 0.003, true)); //1
+  activities.add(Activities("work", 0.003, false)); //1
   activities.add(Activities("travel", 0.0003, true)); //2
   activities.add(Activities("sports", 0.0003, true)); //3
-  activities.add(Activities("cinema", 0.01, true)); //4
+  activities.add(Activities("cinema", 0.01, false)); //4
   activities.add(Activities("shopping", 0.006, true)); //5
-  activities.add(Activities("food", 0.013, true)); //6
+  activities.add(Activities("food", 0.013, false)); //6
   activities.add(Activities("ceremony", 0.015, true)); //7
-  activities.add(Activities("start vaccination", 0.003, false)); //8
+  activities.add(Activities("start vaccination", 0.0, false)); //8
   activities.add(Activities("worship", 0.012, true)); //9
 }
 
@@ -262,7 +262,7 @@ void simulateOneWeek() {
   print("döngü öncesi pozitif insan sayısı:");
   print(positiveCounter.toString());
   activities.forEach((activity) {
-    if(activity.isActive){
+    if (activity.isActive) {
       activity.familiesDo.forEach((family) {
         double random = rnd.nextDouble();
         if (family.recoverDay == 0 && random < activity.getInfectionRate()) {

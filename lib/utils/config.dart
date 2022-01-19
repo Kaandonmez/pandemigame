@@ -1,14 +1,10 @@
 import 'dart:math';
 
-import 'package:pandemigame/utils/covid.dart';
-
 import '/domain/model/activity.dart';
 import '/domain/model/family.dart';
 import '/domain/model/human.dart';
 import '/domain/model/questions.dart';
 import '/domain/model/resources.dart';
-
-import 'utils.dart';
 
 String difficulty = "easy";
 List difficultyOptions = ["easy", "medium", "hard"];

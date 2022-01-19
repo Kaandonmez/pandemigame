@@ -11,16 +11,9 @@ class Human {
   List<Activities> activitiesDo = [];
   int familyId = 0;
   bool isCovid = false;
-  num health = 0; // ! hastalık sınıfı etki edecek dikkat!
-  bool? isVaccinated; //! diğer kodda daha farklı tipteydi dikkat.
-  //bool isGetOverCorona = false;
-  int antibody = 0;
+  num health = 0;
   num satisfaction = 0;
-  //int memberType = 0; //? 0'sa çocuk 1 se yetişkin 2 ise yaşlı
-  bool isAlive = true;
-
-  double sensitivity = 0.0; // 1 e ne kadar yakınsa o kadar dikkatli
-  double infectionRate = 0.0;
+  double sensitivity = 0.0;
 
   Human(String Name, String Surname, int Age) {
     name = Name;
@@ -64,7 +57,8 @@ class Human {
       health = 85 + rnd.nextInt(16);
       satisfaction = 50 + rnd.nextInt(31);
       sensitivity = (15 + rnd.nextInt(56)) / 100;
-      setActivities([activities[1], activities[5], activities[2], activities[8]]);
+      setActivities(
+          [activities[1], activities[5], activities[2], activities[8]]);
       if (rand.nextDouble() < 0.01) {
         setActivities([activities[7]]);
       }

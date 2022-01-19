@@ -9,6 +9,7 @@ import 'utils/covid.dart';
 import 'utils/utils.dart';
 
 Random rnd = Random();
+
 class Content {
   final String text;
   final Color color;
@@ -29,11 +30,13 @@ class gamescreen extends StatefulWidget {
 class gameScreen extends State<gamescreen> {
   final List<SwipeItem> _swipeItems = List<SwipeItem>();
   MatchEngine _matchEngine;
+  var gameEnded = false;
   var health_level = resources.health_level;
   var satisfaction_level = resources.satisfaction_level;
   var economy_level = resources.economy_level;
   var medical_level = resources.medical_level;
   var _positiveCounter = positiveCounter;
+  var totalPoint = "";
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final List<Questions> _question = questions;
   final List<Color> _colors = [
@@ -59,13 +62,19 @@ class gameScreen extends State<gamescreen> {
     setState(() {
       _positiveCounter = positiveCounter;
     });
+    if(health_level == 0 || satisfaction_level == 0 || economy_level == 0 || medical_level == 0 || _positiveCounter == 0){
+      setState(() {
+        totalPoint = (economy_level+satisfaction_level+health_level-(_positiveCounter/80400)).toStringAsFixed(4);
+      });
+      gameEnded = true;
+    }
   }
 
   @override
   void initState() {
     simulateOneWeek();
     reloadResources();
-    if(_swipeItems.isEmpty){
+    if (_swipeItems.isEmpty) {
       for (int i = 0; i < _question.length; i++) {
         _swipeItems.add(SwipeItem(
             content: Content(
@@ -161,15 +170,15 @@ class gameScreen extends State<gamescreen> {
                     LinearPercentIndicator(
                       width: MediaQuery.of(context).size.width - 40,
                       lineHeight: MediaQuery.of(context).size.height * 0.03,
-                      percent: _positiveCounter/80400,
+                      percent: _positiveCounter / 80400,
                       backgroundColor: Colors.grey,
                       progressColor: Colors.blue,
                       leading: RichText(
                           text: WidgetSpan(
                               child: Icon(
-                                Icons.local_hospital_rounded,
-                                color: Colors.red[600],
-                              ))),
+                        Icons.local_hospital_rounded,
+                        color: Colors.red[600],
+                      ))),
                     ),
                     const Divider(
                       height: 10,
@@ -207,7 +216,7 @@ class gameScreen extends State<gamescreen> {
                         i < activities.length;
                         i++)
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 2, 1, 0),
+                          margin: EdgeInsets.fromLTRB(0, 2, 1, 0),
                           padding: EdgeInsets.all(3),
                           decoration: BoxDecoration(
                             color: activities[i].isActive
@@ -224,9 +233,26 @@ class gameScreen extends State<gamescreen> {
                           child: Text(activities[i].name)),
                   ],
                 ),
+                gameEnded ? AlertDialog(
+                  title: const Text('Game over'),
+                  content: SingleChildScrollView(
+                  child: ListBody(
+                  children: <Widget>[
+                  Text('Total point: '+ totalPoint),
+                  ],
+                  ),
+                  ),
+                  actions: <Widget>[
+                  TextButton(
+                  child: const Text('Approve'),
+                  onPressed: () {
+                  Navigator.of(context).pop();
+                  },
+                  ),
               ],
-            ),
-            SwipeCards(
+            ) : SizedBox.shrink()]
+    ),
+            gameEnded ? SizedBox.shrink() : SwipeCards(
               matchEngine: _matchEngine,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
